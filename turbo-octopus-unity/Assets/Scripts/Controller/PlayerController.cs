@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void handleAxisVector (Vector2 axisVector) {
 		float horizontalSpeed = axisVector.x * playerSpeed;
-		animator.SetFloat("horizontalSpeed", Mathf.Abs(horizontalSpeed));
+		animator.SetFloat("horizontalSpeed", horizontalSpeed);
 
 		rigidbody2D.velocity = new Vector2(horizontalSpeed, rigidbody2D.velocity.y);
 	}
