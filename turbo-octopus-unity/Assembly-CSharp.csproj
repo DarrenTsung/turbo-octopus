@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\MuzzleFlashController.cs" />
      <Compile Include="Assets\Scripts\Controller\BulletController.cs" />
      <Compile Include="Assets\Scripts\Controller\CameraController.cs" />
      <Compile Include="Assets\Scripts\Controller\EnemyController.cs" />

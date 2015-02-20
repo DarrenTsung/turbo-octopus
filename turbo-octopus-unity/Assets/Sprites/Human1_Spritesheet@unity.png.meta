@@ -12,6 +12,7 @@ TextureImporter:
     21300014: legs_walk0
     21300016: legs_jumping
     21300018: legs_standing
+    21300020: muzzle_flash
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -152,6 +153,16 @@ TextureImporter:
         height: 40
       alignment: 2
       pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: muzzle_flash
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 870
+        width: 40
+        height: 50
+      alignment: 4
+      pivot: {x: 0, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	protected const float TORSO_BEND_ANGLE_THRESHOLD = 80.0f;
-	protected const float GUN_ANGLE_RECOVERY_SPEED = 30.0f;
 
 	protected float playerSpeed = 6.5f;
 	protected bool facingRight = true;
@@ -15,8 +14,6 @@ public class PlayerController : MonoBehaviour {
 	protected GameObject gunReferencePointRight, gunReferencePointLeft;
 
 	private GunController gunController;
-
-	protected float gunRecoil = 0.0f;
 
 	protected void Start () {
 		animator = GetComponent<Animator> ();
@@ -35,12 +32,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	protected void Update () {
-		// update the gun recoil
-		if (gunRecoil > 0.01f) {
-			gunRecoil -= GUN_ANGLE_RECOVERY_SPEED * Time.deltaTime;
-		} else {
-			gunRecoil = 0.0f;
-		}
 	}
 
 	protected void flip () {
@@ -104,7 +95,7 @@ public class PlayerController : MonoBehaviour {
 
 	protected float objectSpecificAngleAdditions (GameObject obj) {
 		if (obj == gun) {
-			return gunRecoil;
+			return gun.GetComponent<GunController>().GetRecoilAngle();
 		}
 		return 0.0f;
 	}

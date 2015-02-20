@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class BulletController : MonoBehaviour {
 
 	protected const float DESPAWN_DISTANCE = 200.0f;
-	protected const float BULLET_DRAW_DISTANCE_MIN = 1.0f;
-	protected const float BULLET_DRAW_DISTANCE_MAX = 2.0f;
+	protected const float BULLET_DRAW_DISTANCE_MIN = 1.7f;
+	protected const float BULLET_DRAW_DISTANCE_MAX = 2.3f;
 
 	Camera mainCamera;
 
@@ -18,8 +18,8 @@ public class BulletController : MonoBehaviour {
 
 	protected LineRenderer lineRenderer;
 
-	protected float initialSpeedMin = 150.0f;
-	protected float initialSpeedMax = 170.0f;
+	protected float initialSpeedMin = 70.0f;
+	protected float initialSpeedMax = 90.0f;
 
 	protected float damage = 1.0f;
 	protected int ricochetsLeft = 10;
@@ -90,7 +90,7 @@ public class BulletController : MonoBehaviour {
 				behaviorController.onHit(gameObject);
 			}
 				
-			if (true || ricochetsLeft > 0) {
+			if (ricochetsLeft > 0) {
 				ricochetsLeft--;
 
 				// lineRendering
