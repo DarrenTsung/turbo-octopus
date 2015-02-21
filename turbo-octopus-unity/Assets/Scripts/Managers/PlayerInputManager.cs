@@ -8,15 +8,32 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 
 	private PlayerController playerController;
 
-	private KeyCode action0 = KeyCode.Q, action1 = KeyCode.E, action2 = KeyCode.F;
-	private KeyCode fireButton = KeyCode.Mouse0;
+	private KeyCode action0 = KeyCode.Alpha1, action1 = KeyCode.Alpha2, action2 = KeyCode.F;
+	private KeyCode leftRoll = KeyCode.Q, rightRoll = KeyCode.E;
+	private KeyCode fireKey = KeyCode.Mouse0;
+	private KeyCode jumpKey = KeyCode.Space;
+
+	protected bool playerInputAllowed;
 
 	public void SetPlayerController (PlayerController controller) {
 		playerController = controller;
+		playerInputAllowed = true;
+	}
+
+	public void disablePlayerInput() {
+		playerInputAllowed = false;
+	}
+
+	public void enablePlayerInput() {
+		playerInputAllowed = true;
 	}
 
 	protected void Update () {
 		if (playerController) {
+			if (!playerInputAllowed) {
+				return;
+			}
+
 			// axis movement
 			Vector2 axisVector = new Vector2(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
 			playerController.handleAxisVector (axisVector);
@@ -36,9 +53,21 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 				playerController.handleActionPressed (2);
 			}
 
-			if (Input.GetKey(fireButton)) {
+			if (Input.GetKeyDown (leftRoll)) {
+				playerController.handleLeftRollPressed ();
+			}
+			if (Input.GetKeyDown (rightRoll)) {
+				playerController.handleRightRollPressed ();
+			}
+
+			// repeating checks
+			if (Input.GetKey (fireKey)) {
 				playerController.handleFireButtonDown ();
 			}
+			if (Input.GetKeyDown (jumpKey)) {
+				playerController.handleJumpButtonDown ();
+			}
+
 		}
 	}
 }

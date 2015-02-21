@@ -5,15 +5,29 @@ public class PlayerController : MonoBehaviour {
 
 	protected const float TORSO_BEND_ANGLE_THRESHOLD = 80.0f;
 
+	protected const string SPECIFIC_ANIMATION_TRIGGER_KEY = "SpecificAnimationTriggerKey";
+	protected const int NO_ANIMATION_TRIGGER = 0;
+	protected const int FORWARD_ROLL_ANIMATION_TRIGGER = 1;
+	protected const int BACKWARD_ROLL_ANIMATION_TRIGGER = 2;
+
 	protected float playerSpeed = 6.5f;
+	protected float jumpForce = 550.0f;
 	protected bool facingRight = true;
+
+	protected float rollForce = 500.0f;
 
 	protected Animator animator;
 
 	protected GameObject head, torso, leftArm, rightArm, legs, gun;
 	protected GameObject gunReferencePointRight, gunReferencePointLeft;
 
+	protected GameObject groundCheck;
+	protected LayerMask groundLayers;
+	protected bool grounded;
+
 	private GunController gunController;
+
+	protected bool playerInputAllowed;
 
 	protected void Start () {
 		animator = GetComponent<Animator> ();
@@ -29,9 +43,16 @@ public class PlayerController : MonoBehaviour {
 
 		gunReferencePointRight = gun.transform.Find ("ReferencePointRight").gameObject;
 		gunReferencePointLeft = gun.transform.Find ("ReferencePointLeft").gameObject;
+
+		groundLayers = LayerMask.GetMask("Ground");
+		groundCheck = transform.Find ("GroundCheck").gameObject;
+
+		playerInputAllowed = true;
 	}
 
 	protected void Update () {
+		grounded = Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, groundLayers);
+		animator.SetBool("grounded", grounded);
 	}
 
 	protected void flip () {
@@ -79,8 +100,42 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
+	public void handleLeftRollPressed () {
+		if (facingRight) {
+			animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, BACKWARD_ROLL_ANIMATION_TRIGGER);
+		} else {
+			animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, FORWARD_ROLL_ANIMATION_TRIGGER);
+		}
+		rigidbody2D.AddForce(-Vector2.right * rollForce);
+
+		PlayerInputManager.Instance.disablePlayerInput();
+	}
+
+	public void handleRightRollPressed () {
+		if (facingRight) {
+			animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, FORWARD_ROLL_ANIMATION_TRIGGER);
+		} else {
+			animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, BACKWARD_ROLL_ANIMATION_TRIGGER);
+		}
+		rigidbody2D.AddForce(Vector2.right * rollForce);
+
+		PlayerInputManager.Instance.disablePlayerInput();
+	}
+
+	public void clearAnimationTriggerKeyAndAllowPlayerInput () {
+		animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, NO_ANIMATION_TRIGGER);
+		PlayerInputManager.Instance.enablePlayerInput();
+	}
+
 	public void handleFireButtonDown () {
 		gunController.FireBulletIfPossible();
+	}
+
+	public void handleJumpButtonDown () {
+		if (grounded) {
+			rigidbody2D.AddForce(Vector2.up * jumpForce);
+			grounded = false;
+		}
 	}
 
 	protected void pointObjectToPosition (GameObject obj, Vector3 position) {
