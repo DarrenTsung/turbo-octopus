@@ -16,6 +16,7 @@ TextureImporter:
     21300022: legs_walk3
     21300024: legs_walk2
     21300026: legs_wall_left
+    21300028: dustPuff
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -186,6 +187,16 @@ TextureImporter:
         height: 40
       alignment: 2
       pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dustPuff
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 950
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

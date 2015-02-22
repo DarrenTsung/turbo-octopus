@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AnimationHierarchyEditor.cs" />
      <Compile Include="Assets\Scripts\Controller\BulletController.cs" />
      <Compile Include="Assets\Scripts\Controller\CameraController.cs" />
      <Compile Include="Assets\Scripts\Controller\EnemyController.cs" />
@@ -55,6 +54,8 @@
      <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerInputManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TimerManager.cs" />
+     <Compile Include="Assets\Scripts\Misc\AnimationHierarchyEditor.cs" />
+     <Compile Include="Assets\Scripts\Misc\AutoDestroyParticleSystem.cs" />
      <Compile Include="Assets\Scripts\Singleton.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>

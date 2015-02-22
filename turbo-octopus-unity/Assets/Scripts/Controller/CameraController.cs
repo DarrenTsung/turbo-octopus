@@ -17,16 +17,19 @@ public class CameraController : MonoBehaviour {
 
 	private List<ShakeInfo> shakeArray;
 
-	private float mouseControlRadius = 1.0f;
+	private Vector3 basePosition;
 
 	void Start () {
 		shakeArray = new List<ShakeInfo>();
 	}
 	
 	void Update () {
+		Vector3 rayToTransform = transformFollowing.position - basePosition;
+		basePosition += rayToTransform / 5.0f;
+
 		// clear temperal effects on the camera position
-		transform.position = new Vector3(transformFollowing.position.x,
-		                                 transformFollowing.position.y,
+		transform.position = new Vector3(basePosition.x,
+		                                 basePosition.y,
 		                                 -10.0f);
 
 		//Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 0));

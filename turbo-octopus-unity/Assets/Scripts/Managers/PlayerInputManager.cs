@@ -13,7 +13,7 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 	private KeyCode fireKey = KeyCode.Mouse0;
 	private KeyCode jumpKey = KeyCode.Space;
 
-	protected bool playerInputAllowed;
+	public bool playerInputAllowed;
 
 	public void SetPlayerController (PlayerController controller) {
 		playerController = controller;

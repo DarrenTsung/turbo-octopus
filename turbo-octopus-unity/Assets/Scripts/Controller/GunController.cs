@@ -74,8 +74,6 @@ public class GunController : MonoBehaviour {
 		Vector3 bulletRay = exitPoint - bulletReferencePoint.position;
 		bulletRay.z = 0.0f;
 
-		Debug.Log ("Exit: " + exitPoint + " || Reference:" + bulletReferencePoint.position);
-
 		GameObject bulletClone = Instantiate (bullet, bulletExitPoint.position, Quaternion.identity) as GameObject;
 		BulletController bulletController = bulletClone.GetComponent<BulletController> ();
 		bulletController.SetDirection (bulletRay);
