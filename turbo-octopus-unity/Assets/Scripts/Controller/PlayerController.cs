@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 
 	protected Vector2 playerInputVelocity;
 
-	protected float rollForce = 200.0f;
+	protected float rollForce = 300.0f;
 
 	protected Animator animator;
 
@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour {
 	protected GameObject groundCheck, leftCheck, rightCheck;
 	protected bool grounded, leftTouching, rightTouching;
 	protected LayerMask tileLayers;
+
+	protected int leftBoostFrames = 0, rightBoostFrames = 0;
 
 	private GunController gunController;
 
@@ -70,6 +72,16 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	protected void Update () {
+		if (leftBoostFrames > 0) {
+			Debug.Log ("Boosting left!");
+			rigidbody2D.AddForce(-Vector2.right * playerSpeed * 20.0f);
+			leftBoostFrames--;
+		}
+		if (rightBoostFrames > 0) {
+			Debug.Log ("Boosting right!");
+			rigidbody2D.AddForce(Vector2.right * playerSpeed * 20.0f);
+			rightBoostFrames--;
+		}
 	}
 
 	protected void LateUpdate () {
@@ -81,9 +93,9 @@ public class PlayerController : MonoBehaviour {
 		bool previouslyLeftTouching = leftTouching;
 		bool previouslyRightTouching = rightTouching;
 
-		int leftTouchingHit = Physics2D.OverlapCircleNonAlloc(leftCheck.transform.position, 0.35f, emptyArray, tileLayers);
+		int leftTouchingHit = Physics2D.OverlapCircleNonAlloc(leftCheck.transform.position, 0.25f, emptyArray, tileLayers);
 		leftTouching = leftTouchingHit != 0 ? true : false;
-		int rightTouchingHit = Physics2D.OverlapCircleNonAlloc(rightCheck.transform.position, 0.35f, emptyArray, tileLayers);
+		int rightTouchingHit = Physics2D.OverlapCircleNonAlloc(rightCheck.transform.position, 0.25f, emptyArray, tileLayers);
 		rightTouching = rightTouchingHit != 0 ? true : false;
 
 		animator.SetBool("leftTouching", leftTouching);
@@ -97,23 +109,15 @@ public class PlayerController : MonoBehaviour {
 			legs.transform.eulerAngles = new Vector3(0, 0, 0);
 		}
 		if (startedLeftTouching) {
-			// move position to be touching obstacle
-			RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, -Vector2.right, PLAYER_WIDTH, tileLayers);
-			if (hitInfo) {
-				transform.position = new Vector3(hitInfo.point.x + (PLAYER_WIDTH / 2.0f), transform.position.y);
-			}
 			if (startedLeftTouching && !facingRight) {
 				flip ();
 			}
+			leftBoostFrames = 1;
 		} else if (startedRightTouching) {
-			// move position to be touching obstacle
-			RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.right, PLAYER_WIDTH, tileLayers);
-			if (hitInfo) {
-				transform.position = new Vector3(hitInfo.point.x - (PLAYER_WIDTH / 2.0f), transform.position.y);
-			}
 			if (startedRightTouching && facingRight) {
 				flip ();
 			}
+			rightBoostFrames = 1;
 		}
 	}
 
@@ -189,10 +193,12 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, FORWARD_ROLL_ANIMATION_TRIGGER);
 		}
-		rigidbody2D.AddForce(-Vector2.right * rollForce);
 
 		if (grounded) {
 			Instantiate(jumpPuff, groundCheck.transform.position, Quaternion.identity);
+			rigidbody2D.AddForce(-Vector2.right * rollForce);
+		} else {
+			rigidbody2D.AddForce(-Vector2.right * rollForce * 2.0f / 3.0f);
 		}
 
 		PlayerInputManager.Instance.disablePlayerInput();
@@ -204,10 +210,12 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, BACKWARD_ROLL_ANIMATION_TRIGGER);
 		}
-		rigidbody2D.AddForce(Vector2.right * rollForce);
 
 		if (grounded) {
 			Instantiate(jumpPuff, groundCheck.transform.position, Quaternion.identity);
+			rigidbody2D.AddForce(Vector2.right * rollForce);
+		} else {
+			rigidbody2D.AddForce(Vector2.right * rollForce * 2.0f / 3.0f);
 		}
 
 		PlayerInputManager.Instance.disablePlayerInput();
