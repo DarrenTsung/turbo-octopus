@@ -6,7 +6,7 @@ public class GunController : MonoBehaviour {
 	private Transform bulletReferencePoint;
 
 	protected const string FIRING_BULLET_COOLDOWN_KEY = "bulletCooldownKey";
-	protected const float GUN_ANGLE_RECOVERY_SPEED = 10.0f;
+	protected const float GUN_ANGLE_RECOVERY_SPEED = 7.0f;
 
 	protected float bulletFireCooldown = 0.10f;
 
@@ -28,8 +28,8 @@ public class GunController : MonoBehaviour {
 
 	// recoil goes from 0.0 to 1.0
 	protected float recoil = 0.0f;
-	protected float angleRecoil = 10.0f;
-	protected Vector3 positionRecoil = new Vector3(-0.1f, 0.0f, 0.0f);
+	protected float angleRecoil = 0.0f;// 5.0f;
+	protected Vector3 positionRecoil = new Vector3(0,0); // new Vector3(-0.1f, 0.0f, 0.0f);
 
 	protected Vector3 basePosition;
 
@@ -73,6 +73,8 @@ public class GunController : MonoBehaviour {
 
 		Vector3 bulletRay = exitPoint - bulletReferencePoint.position;
 		bulletRay.z = 0.0f;
+
+		Debug.Log ("Exit: " + exitPoint + " || Reference:" + bulletReferencePoint.position);
 
 		GameObject bulletClone = Instantiate (bullet, bulletExitPoint.position, Quaternion.identity) as GameObject;
 		BulletController bulletController = bulletClone.GetComponent<BulletController> ();

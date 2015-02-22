@@ -90,7 +90,7 @@ public class BulletController : MonoBehaviour {
 				behaviorController.onHit(gameObject);
 			}
 				
-			if (ricochetsLeft > 0) {
+			if (true) { //ricochetsLeft > 0) {
 				ricochetsLeft--;
 
 				// lineRendering

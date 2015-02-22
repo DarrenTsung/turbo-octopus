@@ -28,7 +28,7 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 		playerInputAllowed = true;
 	}
 
-	protected void Update () {
+	protected void LateUpdate () {
 		if (playerController) {
 			if (!playerInputAllowed) {
 				return;

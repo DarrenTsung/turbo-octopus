@@ -15,6 +15,7 @@ TextureImporter:
     21300020: muzzle_flash
     21300022: legs_walk3
     21300024: legs_walk2
+    21300026: legs_wall_left
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -173,6 +174,16 @@ TextureImporter:
         y: 430
         width: 60
         height: 50
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: legs_wall_left
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 380
+        width: 40
+        height: 40
       alignment: 2
       pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
