@@ -64,7 +64,6 @@ public class BulletController : MonoBehaviour {
 	void DestroyIfOutOfRange() {
 		Vector2 cameraPosition2D = new Vector2(mainCamera.transform.position.x,
 		                                       mainCamera.transform.position.y);
-		                                      
 
 		Vector2 distanceToCamera = cameraPosition2D - rigidbody2D.position;
 		if (distanceToCamera.magnitude >= DESPAWN_DISTANCE) {
@@ -77,9 +76,7 @@ public class BulletController : MonoBehaviour {
 
 		//check for obstructions in the path that we've traveled in the last timestep 
 		RaycastHit2D hitInfo = Physics2D.Raycast(previousPosition, movementThisStep.normalized, movementThisStep.magnitude);
-		if (hitInfo.collider != null) {
-			//Debug.Log ("Hit: " + hitInfo.collider.gameObject.name);
-
+		if (hitInfo.collider != null && hitInfo.fraction != 0.0f) {
 			if (hitInfo.rigidbody) {
 				Vector2 force = rigidbody2D.velocity * rigidbody2D.mass;
 				hitInfo.rigidbody.AddForce(force);
@@ -90,7 +87,7 @@ public class BulletController : MonoBehaviour {
 				behaviorController.onHit(gameObject);
 			}
 				
-			if (true) { //ricochetsLeft > 0) {
+			if (ricochetsLeft > 0) {
 				ricochetsLeft--;
 
 				// lineRendering

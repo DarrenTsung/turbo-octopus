@@ -19,13 +19,13 @@ public class PlayerController : MonoBehaviour {
 	protected Object walkPuff;
 	protected Object jumpPuff;
 
-	protected float playerSpeed = 7.4f;
+	protected float playerSpeed = 8.4f;
 	protected float jumpForce = 650.0f;
 	protected bool facingRight = true;
 
 	protected Vector2 playerInputVelocity;
 
-	protected float rollForce = 300.0f;
+	protected float rollForce = 400.0f;
 
 	protected Animator animator;
 
@@ -73,12 +73,10 @@ public class PlayerController : MonoBehaviour {
 
 	protected void Update () {
 		if (leftBoostFrames > 0) {
-			Debug.Log ("Boosting left!");
 			rigidbody2D.AddForce(-Vector2.right * playerSpeed * 20.0f);
 			leftBoostFrames--;
 		}
 		if (rightBoostFrames > 0) {
-			Debug.Log ("Boosting right!");
 			rigidbody2D.AddForce(Vector2.right * playerSpeed * 20.0f);
 			rightBoostFrames--;
 		}
@@ -112,12 +110,12 @@ public class PlayerController : MonoBehaviour {
 			if (startedLeftTouching && !facingRight) {
 				flip ();
 			}
-			leftBoostFrames = 1;
+			leftBoostFrames = 2;
 		} else if (startedRightTouching) {
 			if (startedRightTouching && facingRight) {
 				flip ();
 			}
-			rightBoostFrames = 1;
+			rightBoostFrames = 2;
 		}
 	}
 

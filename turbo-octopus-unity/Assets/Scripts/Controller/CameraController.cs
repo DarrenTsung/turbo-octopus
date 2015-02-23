@@ -19,13 +19,17 @@ public class CameraController : MonoBehaviour {
 
 	private Vector3 basePosition;
 
+	private Vector3 PIXEL_SIZE;
+
 	void Start () {
 		shakeArray = new List<ShakeInfo>();
+		PIXEL_SIZE = Camera.main.ScreenToWorldPoint(new Vector3(1, 1, 0)) - Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+		Debug.Log ("Pixel size: " + PIXEL_SIZE);
 	}
 	
 	void Update () {
 		Vector3 rayToTransform = transformFollowing.position - basePosition;
-		basePosition += rayToTransform / 5.0f;
+		basePosition += rayToTransform / 2.0f;
 
 		// clear temperal effects on the camera position
 		transform.position = new Vector3(basePosition.x,
@@ -54,6 +58,15 @@ public class CameraController : MonoBehaviour {
 
 			transform.position += shakeVector;
 		}
+
+		SnapPositionToNearestPixel();
+	}
+
+	protected void SnapPositionToNearestPixel() {
+		Vector3 newPosition = transform.position;
+		newPosition.x = transform.position.x - (transform.position.x % PIXEL_SIZE.x);
+		newPosition.y = transform.position.y - (transform.position.y % PIXEL_SIZE.y);
+		transform.position = newPosition;
 	}
 
 	public void CameraShake (float value, float time) {
