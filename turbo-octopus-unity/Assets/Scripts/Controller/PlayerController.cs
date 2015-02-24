@@ -20,12 +20,14 @@ public class PlayerController : MonoBehaviour {
 	protected Object jumpPuff;
 
 	protected float playerSpeed = 8.4f;
-	protected float jumpForce = 650.0f;
+	protected float jumpForce = 800.0f;
 	protected bool facingRight = true;
+
+	protected bool doubleJumpCharge = true;
 
 	protected Vector2 playerInputVelocity;
 
-	protected float rollForce = 400.0f;
+	protected float rollForce = 500.0f;
 
 	protected Animator animator;
 
@@ -233,15 +235,26 @@ public class PlayerController : MonoBehaviour {
 			rigidbody2D.AddForce(Vector2.up * jumpForce);
 			grounded = false;
 			Instantiate(jumpPuff, groundCheck.transform.position, Quaternion.identity);
+			doubleJumpCharge = true;
 		} else {
 			if (leftTouching) {
 				rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
 				rigidbody2D.AddForce((new Vector2(1.0f, 2.0f)).normalized * jumpForce * 1.3f);
 				Instantiate(jumpPuff, leftCheck.transform.position, Quaternion.Euler(new Vector3(0, 0, 90)));
+				doubleJumpCharge = true;
 			} else if (rightTouching) {
 				rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
 				rigidbody2D.AddForce((new Vector2(-1.0f, 2.0f)).normalized * jumpForce * 1.3f);
 				Instantiate(jumpPuff, rightCheck.transform.position, Quaternion.Euler(new Vector3(0, 0, 90)));
+				doubleJumpCharge = true;
+			} else {
+				// double jump if not touching wall or ground
+				if (doubleJumpCharge) {
+					doubleJumpCharge = false;
+					Vector2 jumpVector = Vector2.up;
+					jumpVector.x = 0.3f * Input.GetAxis ("Horizontal");
+					rigidbody2D.AddForce(jumpVector.normalized * jumpForce * 0.6f);
+				}
 			}
 		}
 	}

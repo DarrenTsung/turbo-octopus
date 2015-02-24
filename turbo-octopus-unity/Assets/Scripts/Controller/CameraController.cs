@@ -24,7 +24,6 @@ public class CameraController : MonoBehaviour {
 	void Start () {
 		shakeArray = new List<ShakeInfo>();
 		PIXEL_SIZE = Camera.main.ScreenToWorldPoint(new Vector3(1, 1, 0)) - Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
-		Debug.Log ("Pixel size: " + PIXEL_SIZE);
 	}
 	
 	void Update () {
