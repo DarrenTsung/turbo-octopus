@@ -2,13 +2,14 @@
 using System.Collections;
 
 public class EnemyController : MonoBehaviour {
+	protected float health;
 
-	public void onHit (GameObject obj) {
+	public virtual void OnHit (GameObject obj) {
 
 	}
 
 	void Start () {
-	
+		health = 10.0f;
 	}
 	
 	void Update () {

@@ -28,8 +28,8 @@ public class GunController : MonoBehaviour {
 
 	// recoil goes from 0.0 to 1.0
 	protected float recoil = 0.0f;
-	protected float angleRecoil = 0.0f;// 5.0f;
-	protected Vector3 positionRecoil = new Vector3(0,0); // new Vector3(-0.1f, 0.0f, 0.0f);
+	protected float angleRecoil = 5.0f;
+	protected Vector3 positionRecoil = new Vector3(-0.5f, 0.0f, 0.0f);
 
 	protected Vector3 basePosition;
 

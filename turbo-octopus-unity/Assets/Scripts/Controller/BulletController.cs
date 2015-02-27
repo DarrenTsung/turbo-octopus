@@ -30,6 +30,10 @@ public class BulletController : MonoBehaviour {
 
 	protected bool isTracer;
 
+	public float GetDamage() {
+		return damage;
+	}
+
 	public void SetDirection(Vector2 direction) {
 		rigidbody2D.velocity = Random.Range(initialSpeedMin, initialSpeedMax) * direction.normalized;
 
@@ -77,14 +81,19 @@ public class BulletController : MonoBehaviour {
 		//check for obstructions in the path that we've traveled in the last timestep 
 		RaycastHit2D hitInfo = Physics2D.Raycast(previousPosition, movementThisStep.normalized, movementThisStep.magnitude);
 		if (hitInfo.collider != null && hitInfo.fraction != 0.0f) {
-			if (hitInfo.rigidbody) {
+			GameObject obj = GameUtils.GetTopLevelObject(hitInfo.transform.gameObject);
+			Debug.Log ("Obj is: " + obj);
+			Rigidbody2D objRigidbody = obj.GetComponent<Rigidbody2D>();
+			if (objRigidbody) {
 				Vector2 force = rigidbody2D.velocity * rigidbody2D.mass;
-				hitInfo.rigidbody.AddForce(force);
+				Debug.Log ("on hit force: " + force);
+				objRigidbody.AddForce(force);
 			}
 
-			EnemyController behaviorController = hitInfo.collider.gameObject.GetComponent<EnemyController> ();
+			EnemyController behaviorController = obj.GetComponent<EnemyController> ();
 			if (behaviorController) {
-				behaviorController.onHit(gameObject);
+				Debug.Log ("on hit behavior!");
+				behaviorController.OnHit(gameObject);
 			}
 				
 			if (ricochetsLeft > 0) {
