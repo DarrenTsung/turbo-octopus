@@ -8,7 +8,7 @@ public class PrefabManager : Singleton<PrefabManager> {
 	public Object bulletPuff, bulletExplosion;
 
 	void Awake () {
-		bulletPuff = Resources.Load("Prefabs/BulletPuff");
-		bulletExplosion = Resources.Load ("Prefabs/BulletExplosion");
+		bulletPuff = Resources.Load("Prefabs/SpecialEffects/BulletPuff");
+		bulletExplosion = Resources.Load ("Prefabs/SpecialEffects/BulletExplosion");
 	}
 }

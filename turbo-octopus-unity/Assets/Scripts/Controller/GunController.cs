@@ -37,7 +37,7 @@ public class GunController : MonoBehaviour {
 		bulletExitPoint = transform.Find ("BulletExitPoint");
 		bulletReferencePoint = transform.Find ("BulletReferencePoint");
 
-		bullet = Resources.Load ("Prefabs/Bullet");
+		bullet = Resources.Load ("Prefabs/Objects/Bullet");
 
 		muzzleFlashController = transform.Find ("MuzzleFlash").gameObject.GetComponent<MuzzleFlashController> ();
 

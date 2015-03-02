@@ -67,8 +67,8 @@ public class PlayerController : MonoBehaviour {
 		rightCheck = transform.Find ("Checks/RightCheck").gameObject;
 
 		TimerManager.Instance.addTimerForKey(WALK_PUFF_TIMER_KEY, Random.Range(MIN_WALK_PUFF_TIMER, MAX_WALK_PUFF_TIMER));
-		walkPuff = Resources.Load ("Prefabs/WalkPuff");
-		jumpPuff = Resources.Load ("Prefabs/JumpPuff");
+		walkPuff = Resources.Load ("Prefabs/SpecialEffects/WalkPuff");
+		jumpPuff = Resources.Load ("Prefabs/SpecialEffects/JumpPuff");
 
 		playerInputAllowed = true;
 	}
@@ -146,8 +146,6 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			updatedSpeed = actualSpeed + ((desiredSpeed - actualSpeed) * Time.deltaTime);
 		}
-
-		Debug.Log ("Updated speed: " + updatedSpeed);
 
 		rigidbody2D.velocity = new Vector2(updatedSpeed, rigidbody2D.velocity.y);
 
