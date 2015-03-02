@@ -22,7 +22,7 @@ public class BulletController : MonoBehaviour {
 	protected float initialSpeedMax = 90.0f;
 
 	protected float damage = 1.0f;
-	protected int ricochetsLeft = 10;
+	protected int ricochetsLeft = 0;
 
 	protected float myDrawDistance;
 
@@ -82,17 +82,14 @@ public class BulletController : MonoBehaviour {
 		RaycastHit2D hitInfo = Physics2D.Raycast(previousPosition, movementThisStep.normalized, movementThisStep.magnitude);
 		if (hitInfo.collider != null && hitInfo.fraction != 0.0f) {
 			GameObject obj = GameUtils.GetTopLevelObject(hitInfo.transform.gameObject);
-			Debug.Log ("Obj is: " + obj);
 			Rigidbody2D objRigidbody = obj.GetComponent<Rigidbody2D>();
 			if (objRigidbody) {
 				Vector2 force = rigidbody2D.velocity * rigidbody2D.mass;
-				Debug.Log ("on hit force: " + force);
 				objRigidbody.AddForce(force);
 			}
 
 			EnemyController behaviorController = obj.GetComponent<EnemyController> ();
 			if (behaviorController) {
-				Debug.Log ("on hit behavior!");
 				behaviorController.OnHit(gameObject);
 			}
 				
@@ -114,8 +111,10 @@ public class BulletController : MonoBehaviour {
 				rigidbody2D.position = hitInfo.point + (reflectedDistance * reflectedVelocity.normalized);
 				CalculateNewPosition();
 			} else {
-				rigidbody2D.position = hitInfo.point;
-				rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
+				Instantiate(PrefabManager.Instance.bulletExplosion, hitInfo.point, Quaternion.identity);
+				GameObject bulletPuff = Instantiate(PrefabManager.Instance.bulletPuff, hitInfo.point, Quaternion.identity) as GameObject;
+				bulletPuff.GetComponent<ParticleVelocityScript> ().SetVelocity(-rigidbody2D.velocity * 0.015f);
+				Destroy(gameObject);
 			}
 		} 
 

@@ -1,22 +1,20 @@
 fileFormatVersion: 2
-guid: 4a327f5e004624bdaa2311c49a55ed76
+guid: 803256ada244d4b7984faffadf9c6bb7
 TextureImporter:
   fileIDToRecycleName:
-    21300000: head
-    21300002: right_arm
-    21300004: left_arm
-    21300006: gun
-    21300008: torso
-    21300010: legs_walk1
-    21300012: legs_walk2
-    21300014: legs_walk0
-    21300016: legs_jumping
-    21300018: legs_standing
-    21300020: muzzle_flash
-    21300022: legs_walk3
-    21300024: legs_walk2
-    21300026: legs_wall_left
-    21300028: dustPuff
+    21300000: Player@head
+    21300002: Player@right_arm
+    21300004: Player@left_arm
+    21300006: Player@gun
+    21300008: Player@muzzle_flash
+    21300010: Player@torso
+    21300012: Player@legs_standing
+    21300014: Player@legs_jumping
+    21300016: Player@legs_walk0
+    21300018: Player@legs_walk1
+    21300020: Player@legs_walk2
+    21300022: Player@legs_walk3
+    21300024: Player@legs_wall
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -36,7 +34,7 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
@@ -52,151 +50,141 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 10
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: head
+    - name: Player@head
       rect:
         serializedVersion: 2
-        x: 10
-        y: 940
-        width: 50
-        height: 50
+        x: 2
+        y: 94
+        width: 4
+        height: 5
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_arm
+    - name: Player@right_arm
       rect:
         serializedVersion: 2
-        x: 10
-        y: 910
-        width: 40
-        height: 20
-      alignment: 9
-      pivot: {x: 0, y: .25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: left_arm
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 910
-        width: 30
-        height: 20
-      alignment: 9
-      pivot: {x: 0, y: .75}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: gun
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 870
-        width: 80
-        height: 30
+        x: 1
+        y: 91
+        width: 4
+        height: 2
       alignment: 4
       pivot: {x: 0, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: torso
+    - name: Player@left_arm
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 91
+        width: 3
+        height: 2
+      alignment: 4
+      pivot: {x: 0, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@gun
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 87
+        width: 8
+        height: 3
+      alignment: 4
+      pivot: {x: 0, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@muzzle_flash
       rect:
         serializedVersion: 2
         x: 10
-        y: 800
-        width: 50
-        height: 60
+        y: 87
+        width: 4
+        height: 5
+      alignment: 4
+      pivot: {x: 0, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@torso
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 80
+        width: 5
+        height: 6
       alignment: 9
       pivot: {x: .600000024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: legs_walk1
+    - name: Player@legs_standing
       rect:
         serializedVersion: 2
-        x: 20
-        y: 550
-        width: 40
-        height: 50
+        x: 2
+        y: 74
+        width: 4
+        height: 5
       alignment: 2
       pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: legs_walk2
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 490
-        width: 40
-        height: 50
-      alignment: 9
-      pivot: {x: .5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: legs_walk0
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 610
-        width: 40
-        height: 50
-      alignment: 2
-      pivot: {x: .5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: legs_jumping
+    - name: Player@legs_jumping
       rect:
         serializedVersion: 2
         x: 0
-        y: 680
-        width: 80
-        height: 50
+        y: 68
+        width: 8
+        height: 5
       alignment: 2
       pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: legs_standing
+    - name: Player@legs_walk0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 740
-        width: 40
-        height: 50
+        x: 2
+        y: 61
+        width: 4
+        height: 5
       alignment: 2
       pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: muzzle_flash
+    - name: Player@legs_walk1
       rect:
         serializedVersion: 2
-        x: 100
-        y: 870
-        width: 40
-        height: 50
-      alignment: 4
-      pivot: {x: 0, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: legs_walk3
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 430
-        width: 60
-        height: 50
+        x: 2
+        y: 55
+        width: 4
+        height: 5
       alignment: 2
       pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: legs_wall_left
+    - name: Player@legs_walk2
       rect:
         serializedVersion: 2
-        x: 20
-        y: 380
-        width: 40
-        height: 40
+        x: 2
+        y: 49
+        width: 4
+        height: 5
       alignment: 2
       pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: dustPuff
+    - name: Player@legs_walk3
       rect:
         serializedVersion: 2
-        x: 80
-        y: 950
-        width: 30
-        height: 30
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        x: 1
+        y: 43
+        width: 6
+        height: 5
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@legs_wall
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 38
+        width: 4
+        height: 4
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

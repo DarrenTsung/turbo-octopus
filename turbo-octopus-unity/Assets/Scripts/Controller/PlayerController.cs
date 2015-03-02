@@ -62,9 +62,9 @@ public class PlayerController : MonoBehaviour {
 		gunReferencePointLeft = gun.transform.Find ("ReferencePointLeft").gameObject;
 
 		tileLayers = LayerMask.GetMask("Tile");
-		groundCheck = transform.Find ("GroundCheck").gameObject;
-		leftCheck = transform.Find ("LeftCheck").gameObject;
-		rightCheck = transform.Find ("RightCheck").gameObject;
+		groundCheck = transform.Find ("Checks/GroundCheck").gameObject;
+		leftCheck = transform.Find ("Checks/LeftCheck").gameObject;
+		rightCheck = transform.Find ("Checks/RightCheck").gameObject;
 
 		TimerManager.Instance.addTimerForKey(WALK_PUFF_TIMER_KEY, Random.Range(MIN_WALK_PUFF_TIMER, MAX_WALK_PUFF_TIMER));
 		walkPuff = Resources.Load ("Prefabs/WalkPuff");
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 
 	protected void LateUpdate () {
 		Collider2D[] emptyArray = new Collider2D[1];
-		int groundedHit = Physics2D.OverlapCircleNonAlloc(groundCheck.transform.position, 0.1f, emptyArray, tileLayers);
+		int groundedHit = Physics2D.OverlapCircleNonAlloc(groundCheck.transform.position, 0.2f, emptyArray, tileLayers);
 		grounded = groundedHit != 0 ? true : false;
 		animator.SetBool("grounded", grounded);
 
@@ -129,25 +129,35 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void handleAxisVector (Vector2 axisVector) {
+		// the player input creates a desired velocity -> the velocity we should go towards
+		float desiredSpeed = axisVector.x;
+
+		float minSpeed = leftTouching ? -0.4f : -1.0f;
+		float maxSpeed = rightTouching ? 0.4f : 1.0f;
+
+		desiredSpeed = Mathf.Clamp(desiredSpeed, minSpeed, maxSpeed);
+		desiredSpeed *= playerSpeed;
+
+		float actualSpeed = rigidbody2D.velocity.x;
+		float updatedSpeed;
+
 		if (grounded) {
-			float horizontalSpeed = axisVector.x;
+			updatedSpeed = desiredSpeed;
+		} else {
+			updatedSpeed = actualSpeed + ((desiredSpeed - actualSpeed) * Time.deltaTime);
+		}
 
-			float minSpeed = leftTouching ? -0.4f : -1.0f;
-			float maxSpeed = rightTouching ? 0.4f : 1.0f;
+		Debug.Log ("Updated speed: " + updatedSpeed);
 
-			horizontalSpeed = Mathf.Clamp(horizontalSpeed, minSpeed, maxSpeed);
-			horizontalSpeed *= playerSpeed;
+		rigidbody2D.velocity = new Vector2(updatedSpeed, rigidbody2D.velocity.y);
 
-			animator.SetFloat ("horizontalSpeed", horizontalSpeed);
+		animator.SetFloat ("horizontalSpeed", rigidbody2D.velocity.x);
 
-			rigidbody2D.velocity = new Vector2(horizontalSpeed, rigidbody2D.velocity.y);
-
-			if (horizontalSpeed != 0.0 && TimerManager.Instance.timerDoneForKey(WALK_PUFF_TIMER_KEY)) {
+		if (grounded) {
+			if (rigidbody2D.velocity.x != 0.0 && TimerManager.Instance.timerDoneForKey(WALK_PUFF_TIMER_KEY)) {
 				Instantiate(walkPuff, groundCheck.transform.position, Quaternion.identity);
 				TimerManager.Instance.resetTimerForKey(WALK_PUFF_TIMER_KEY, Random.Range(MIN_WALK_PUFF_TIMER, MAX_WALK_PUFF_TIMER));
 			}
-		} else {
-			animator.SetFloat ("horizontalSpeed", 0.0f);
 		}
 	}
 

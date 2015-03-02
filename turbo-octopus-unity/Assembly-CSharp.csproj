@@ -57,9 +57,11 @@
      <Compile Include="Assets\Scripts\FiniteStateMachine.cs" />
      <Compile Include="Assets\Scripts\GameUtils.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerInputManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\PrefabManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TimerManager.cs" />
      <Compile Include="Assets\Scripts\Misc\AnimationHierarchyEditor.cs" />
      <Compile Include="Assets\Scripts\Misc\AutoDestroyParticleSystem.cs" />
+     <Compile Include="Assets\Scripts\Misc\ParticleVelocityScript.cs" />
      <Compile Include="Assets\Scripts\Singleton.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCamera.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCameraAnchor.cs" />
