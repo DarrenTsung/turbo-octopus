@@ -1,19 +1,25 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controller/BulletController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controller/GunController.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameUtils.cs" Line="13" Column="40" />
-      <File FileName="Assets/Scripts/Managers/PrefabManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Controller/BulletController.cs" Line="115" Column="37" />
-      <File FileName="Assets/Scripts/Controller/EnemyController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Controller/CameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/TimerManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Controller/EnemyControllers/SluggyController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Controller/GunController.cs" Line="44" Column="34" />
-      <File FileName="Assets/Scripts/Controller/PlayerController.cs" Line="150" Column="3" />
-      <File FileName="Assets/Scripts/Misc/ParticleVelocityScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Controller/MuzzleFlashController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Controller/GunController.cs" Line="77" Column="39" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Controller" expanded="True">
+                <Node name="EnemyControllers" expanded="True" />
+                <Node name="LevelController.cs" selected="True" />
+              </Node>
+              <Node name="Managers" expanded="True" />
+              <Node name="Misc" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

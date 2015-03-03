@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Controller\TileController.cs" />
      <Compile Include="Assets\Scripts\FiniteStateMachine.cs" />
      <Compile Include="Assets\Scripts\GameUtils.cs" />
+     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerInputManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PrefabManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TimerManager.cs" />
