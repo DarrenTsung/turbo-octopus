@@ -652,11 +652,11 @@ public class tk2dCamera : MonoBehaviour
 
 		float zoomScale = 1.0f / ZoomFactor;
 
-		// Only need the half texel offset on PC/D3D, when not running in d3d11 mode
+		// Only need the half texel offset on PC/D3D
 		bool needHalfTexelOffset = (Application.platform == RuntimePlatform.WindowsPlayer ||
 						   			Application.platform == RuntimePlatform.WindowsWebPlayer ||
 						   			Application.platform == RuntimePlatform.WindowsEditor);
-		float halfTexel = (halfTexelOffset && needHalfTexelOffset && SystemInfo.graphicsShaderLevel < 40) ? 0.5f : 0.0f;
+		float halfTexel = (halfTexelOffset && needHalfTexelOffset) ? 0.5f : 0.0f;
 
 		float orthoSize = settings.cameraSettings.orthographicSize;
 		switch (settings.cameraSettings.orthographicType) {

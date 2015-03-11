@@ -35,9 +35,9 @@ public class BulletController : MonoBehaviour {
 	}
 
 	public void SetDirection(Vector2 direction) {
-		rigidbody2D.velocity = Random.Range(initialSpeedMin, initialSpeedMax) * direction.normalized;
+		GetComponent<Rigidbody2D>().velocity = Random.Range(initialSpeedMin, initialSpeedMax) * direction.normalized;
 
-		previousPosition = rigidbody2D.position;
+		previousPosition = GetComponent<Rigidbody2D>().position;
 	}
 
 	public void SetTracerBullet(bool tracerBullet) {
@@ -54,7 +54,7 @@ public class BulletController : MonoBehaviour {
 		myDrawDistance = Random.Range(BULLET_DRAW_DISTANCE_MIN, BULLET_DRAW_DISTANCE_MAX);
 
 		collisionPoints = new List<Vector2> ();
-		collisionPoints.Insert(0, rigidbody2D.position);
+		collisionPoints.Insert(0, GetComponent<Rigidbody2D>().position);
 	}
 
 	void Update() {
@@ -69,14 +69,14 @@ public class BulletController : MonoBehaviour {
 		Vector2 cameraPosition2D = new Vector2(mainCamera.transform.position.x,
 		                                       mainCamera.transform.position.y);
 
-		Vector2 distanceToCamera = cameraPosition2D - rigidbody2D.position;
+		Vector2 distanceToCamera = cameraPosition2D - GetComponent<Rigidbody2D>().position;
 		if (distanceToCamera.magnitude >= DESPAWN_DISTANCE) {
 			Destroy(gameObject);
 		}
 	}
 
 	void CalculateNewPosition() {
-		Vector2 movementThisStep = rigidbody2D.position - previousPosition;
+		Vector2 movementThisStep = GetComponent<Rigidbody2D>().position - previousPosition;
 
 		//check for obstructions in the path that we've traveled in the last timestep 
 		RaycastHit2D hitInfo = Physics2D.Raycast(previousPosition, movementThisStep.normalized, movementThisStep.magnitude);
@@ -84,7 +84,7 @@ public class BulletController : MonoBehaviour {
 			GameObject obj = GameUtils.GetTopLevelObject(hitInfo.transform.gameObject);
 			Rigidbody2D objRigidbody = obj.GetComponent<Rigidbody2D>();
 			if (objRigidbody) {
-				Vector2 force = rigidbody2D.velocity * rigidbody2D.mass;
+				Vector2 force = GetComponent<Rigidbody2D>().velocity * GetComponent<Rigidbody2D>().mass;
 				objRigidbody.AddForce(force);
 			}
 
@@ -97,28 +97,28 @@ public class BulletController : MonoBehaviour {
 				ricochetsLeft--;
 
 				// lineRendering
-				Vector2 bulletVel = rigidbody2D.velocity;
+				Vector2 bulletVel = GetComponent<Rigidbody2D>().velocity;
 				Vector2 normal = hitInfo.normal.normalized;
 
 				collisionPoints.Insert(0, hitInfo.point);
 
 				Vector2 reflectedVelocity = bulletVel - (2.0f * Vector2.Dot (bulletVel, normal) * normal);
-				rigidbody2D.velocity = reflectedVelocity;
+				GetComponent<Rigidbody2D>().velocity = reflectedVelocity;
 
 				float reflectedDistance = (1.0f - hitInfo.fraction) * movementThisStep.magnitude;
 
 				previousPosition = hitInfo.point;
-				rigidbody2D.position = hitInfo.point + (reflectedDistance * reflectedVelocity.normalized);
+				GetComponent<Rigidbody2D>().position = hitInfo.point + (reflectedDistance * reflectedVelocity.normalized);
 				CalculateNewPosition();
 			} else {
 				Instantiate(PrefabManager.Instance.bulletExplosion, hitInfo.point, Quaternion.identity);
 				GameObject bulletPuff = Instantiate(PrefabManager.Instance.bulletPuff, hitInfo.point, Quaternion.identity) as GameObject;
-				bulletPuff.GetComponent<ParticleVelocityScript> ().SetVelocity(-rigidbody2D.velocity * 0.015f);
+				bulletPuff.GetComponent<ParticleVelocityScript> ().SetVelocity(-GetComponent<Rigidbody2D>().velocity * 0.015f);
 				Destroy(gameObject);
 			}
 		} 
 
-		previousPosition = rigidbody2D.position; 
+		previousPosition = GetComponent<Rigidbody2D>().position; 
 	}
 
 
@@ -130,10 +130,10 @@ public class BulletController : MonoBehaviour {
 	List<Vector3> CalculateDrawPoints() {
 		List<Vector3> pointsToDraw = new List<Vector3> ();
 
-		pointsToDraw.Add (new Vector3(rigidbody2D.position.x, rigidbody2D.position.y, -1.0f));
+		pointsToDraw.Add (new Vector3(GetComponent<Rigidbody2D>().position.x, GetComponent<Rigidbody2D>().position.y, -1.0f));
 
 		float distanceLeftToDraw = myDrawDistance;
-		Vector2 previousPosition = rigidbody2D.position;
+		Vector2 previousPosition = GetComponent<Rigidbody2D>().position;
 		for (int i=0; i<collisionPoints.Count; i++) {
 			Vector2 currentPosition = collisionPoints[i];
 			float distanceToDraw = (currentPosition - previousPosition).magnitude;

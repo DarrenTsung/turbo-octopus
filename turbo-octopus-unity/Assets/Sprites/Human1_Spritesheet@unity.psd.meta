@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 803256ada244d4b7984faffadf9c6bb7
+timeCreated: 1426091011
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Player@head
@@ -15,6 +17,15 @@ TextureImporter:
     21300020: Player@legs_walk2
     21300022: Player@legs_walk3
     21300024: Player@legs_wall
+    21300026: Player@sword
+    21300028: Player@sword_small_slash
+    21300030: Player@sword
+    21300032: Player@sheath
+    21300034: Player@sheath_empty
+    21300036: Player@legs_attacking
+    21300038: Player@slash0
+    21300040: Player@slash1
+    21300042: Player@slash1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -33,8 +44,11 @@ TextureImporter:
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
@@ -43,6 +57,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
+  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
@@ -186,5 +201,67 @@ TextureImporter:
       alignment: 2
       pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@sword
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 81
+        width: 12
+        height: 2
+      alignment: 9
+      pivot: {x: 0, y: .75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@sheath
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 65
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@sheath_empty
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 65
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@legs_attacking
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 32
+        width: 8
+        height: 5
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@slash0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 43
+        width: 27
+        height: 21
+      alignment: 9
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@slash1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 43
+        width: 27
+        height: 21
+      alignment: 9
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

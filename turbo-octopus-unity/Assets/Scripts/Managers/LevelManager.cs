@@ -120,12 +120,32 @@ public class CorridorDigger {
 			}
 		}
 	}
+
+	public void AddToColliderTilesToBePainted(HashSet<Vector2> colliderTilesToPaint) {
+		Vector2 bottomLeftPosition = BottomLeftNode();
+		if (orientation == Orientation.Down || orientation == Orientation.Up) {
+			for (int x = -1; x < GameUtils.CORRIDOR_SIZE + 1; x += GameUtils.CORRIDOR_SIZE + 1) {
+				for (int y = 0; y < GameUtils.CORRIDOR_SIZE; y++) {
+					Vector2 colliderPosition = new Vector2(bottomLeftPosition.x + x, bottomLeftPosition.y + y);
+					colliderTilesToPaint.Add(colliderPosition);
+				}
+			}
+		} else if (orientation == Orientation.Left || orientation == Orientation.Right) {
+			for (int y = -1; y < GameUtils.CORRIDOR_SIZE + 1; y += GameUtils.CORRIDOR_SIZE + 1) {
+				for (int x = 0; x < GameUtils.CORRIDOR_SIZE; x++) {
+					Vector2 colliderPosition = new Vector2(bottomLeftPosition.x + x, bottomLeftPosition.y + y);
+					colliderTilesToPaint.Add(colliderPosition);
+				}
+			}
+		}
+	}
 }
 
 public class CorridorModel {
 	public RoomModel room1, room2;
 	public float minDistance;
 	public DoorModel door1, door2;
+	private HashSet<Vector2> colliderTilesToPaint;
 
 	public CorridorModel(RoomModel room1, RoomModel room2, float minDistance, DoorModel door1, DoorModel door2) {
 		this.room1 = room1;
@@ -133,9 +153,11 @@ public class CorridorModel {
 		this.minDistance = minDistance;
 		this.door1 = door1;
 		this.door2 = door2;
+
+		colliderTilesToPaint = new HashSet<Vector2>();
 	}
 
-	public void PaintOntoTilemap(GameObject tilemapObject) {
+	public void PaintBackgroundOntoTilemap(GameObject tilemapObject) {
 		tk2dTileMap tilemap = tilemapObject.GetComponent<tk2dTileMap>();
 
 		Vector2 door1Position = room1.instancePosition + door1.center;
@@ -151,18 +173,38 @@ public class CorridorModel {
 		// paint initial positions onto tilemap
 		c1.PaintBackgroundOntoTilemap(tilemap);
 		c2.PaintBackgroundOntoTilemap(tilemap);
+		c1.AddToColliderTilesToBePainted(colliderTilesToPaint);
+		c2.AddToColliderTilesToBePainted(colliderTilesToPaint);
 
 		while (true) {
 			c1.AdvanceOneStep();
 			c1.PaintBackgroundOntoTilemap(tilemap);
+			c1.AddToColliderTilesToBePainted(colliderTilesToPaint);
 			if (c1.Finished()) {
 				break;
 			}
 
 			c2.AdvanceOneStep();
 			c2.PaintBackgroundOntoTilemap(tilemap);
+			c2.AddToColliderTilesToBePainted(colliderTilesToPaint);
 			if (c2.Finished()) {
 				break;
+			}
+		}
+	}
+
+	public void PaintCollidersOntoTilemap(GameObject tilemapObject) {
+		tk2dTileMap tilemap = tilemapObject.GetComponent<tk2dTileMap>();
+
+		foreach (Vector2 tilePosition in colliderTilesToPaint) {
+			int backgroundSprite = tilemap.GetTile((int)tilePosition.x, (int)tilePosition.y, GameUtils.BACKGROUND_LAYER);
+			int colliderSprite = tilemap.GetTile((int)tilePosition.x, (int)tilePosition.y, GameUtils.COLLIDER_LAYER);
+
+			if (backgroundSprite == -1) {
+				// if there isn't a background sprite at the tile position, we can proceed
+				// if there is a collider tile, we don't redraw since it should have had all the information it needs to draw correctly
+
+
 			}
 		}
 	}
@@ -498,7 +540,10 @@ public class LevelManager : Singleton<LevelManager> {
 
 		// paint the corridors onto the tilemap
 		foreach (CorridorModel model in chosenEdges) {
-			model.PaintOntoTilemap(levelTilemap);
+			model.PaintBackgroundOntoTilemap(levelTilemap);
+		}
+		foreach (CorridorModel model in chosenEdges) {
+			model.PaintCollidersOntoTilemap(levelTilemap);
 		}
 	}
 

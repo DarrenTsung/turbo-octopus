@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	protected const int NO_ANIMATION_TRIGGER = 0;
 	protected const int FORWARD_ROLL_ANIMATION_TRIGGER = 1;
 	protected const int BACKWARD_ROLL_ANIMATION_TRIGGER = 2;
+	protected const int SLASH_ANIMATION_TRIGGER = 3;
 
 	protected const float MIN_WALK_PUFF_TIMER = 0.3f;
 	protected const float MAX_WALK_PUFF_TIMER = 0.8f;
@@ -42,11 +43,14 @@ public class PlayerController : MonoBehaviour {
 	protected int leftBoostFrames = 0, rightBoostFrames = 0;
 
 	private GunController gunController;
+	new private Rigidbody2D rigidbody;
 
 	protected bool playerInputAllowed;
 
 	protected void Start () {
 		animator = GetComponent<Animator> ();
+		rigidbody = GetComponent<Rigidbody2D> ();
+
 		PlayerInputManager.Instance.SetPlayerController(this);
 
 		body = transform.Find ("Body").gameObject;
@@ -74,14 +78,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	protected void Update () {
-		if (leftBoostFrames > 0) {
-			rigidbody2D.AddForce(-Vector2.right * playerSpeed * 20.0f);
-			leftBoostFrames--;
-		}
-		if (rightBoostFrames > 0) {
-			rigidbody2D.AddForce(Vector2.right * playerSpeed * 20.0f);
-			rightBoostFrames--;
-		}
 	}
 
 	protected void LateUpdate () {
@@ -107,17 +103,16 @@ public class PlayerController : MonoBehaviour {
 			torso.transform.eulerAngles = new Vector3(0, 0, 0);
 			head.transform.eulerAngles = new Vector3(0, 0, 0);
 			legs.transform.eulerAngles = new Vector3(0, 0, 0);
+			clearAnimationTriggerKeyAndAllowPlayerInput();
 		}
 		if (startedLeftTouching) {
 			if (startedLeftTouching && !facingRight) {
 				flip ();
 			}
-			leftBoostFrames = 2;
 		} else if (startedRightTouching) {
 			if (startedRightTouching && facingRight) {
 				flip ();
 			}
-			rightBoostFrames = 2;
 		}
 	}
 
@@ -138,7 +133,7 @@ public class PlayerController : MonoBehaviour {
 		desiredSpeed = Mathf.Clamp(desiredSpeed, minSpeed, maxSpeed);
 		desiredSpeed *= playerSpeed;
 
-		float actualSpeed = rigidbody2D.velocity.x;
+		float actualSpeed = rigidbody.velocity.x;
 		float updatedSpeed;
 
 		if (grounded) {
@@ -147,12 +142,12 @@ public class PlayerController : MonoBehaviour {
 			updatedSpeed = actualSpeed + ((desiredSpeed - actualSpeed) * Time.deltaTime);
 		}
 
-		rigidbody2D.velocity = new Vector2(updatedSpeed, rigidbody2D.velocity.y);
+		rigidbody.velocity = new Vector2(updatedSpeed, rigidbody.velocity.y);
 
-		animator.SetFloat ("horizontalSpeed", rigidbody2D.velocity.x);
+		animator.SetFloat ("horizontalSpeed", rigidbody.velocity.x);
 
 		if (grounded) {
-			if (rigidbody2D.velocity.x != 0.0 && TimerManager.Instance.timerDoneForKey(WALK_PUFF_TIMER_KEY)) {
+			if (rigidbody.velocity.x != 0.0 && TimerManager.Instance.timerDoneForKey(WALK_PUFF_TIMER_KEY)) {
 				Instantiate(walkPuff, groundCheck.transform.position, Quaternion.identity);
 				TimerManager.Instance.resetTimerForKey(WALK_PUFF_TIMER_KEY, Random.Range(MIN_WALK_PUFF_TIMER, MAX_WALK_PUFF_TIMER));
 			}
@@ -204,9 +199,9 @@ public class PlayerController : MonoBehaviour {
 
 		if (grounded) {
 			Instantiate(jumpPuff, groundCheck.transform.position, Quaternion.identity);
-			rigidbody2D.AddForce(-Vector2.right * rollForce);
+			rigidbody.AddForce(-Vector2.right * rollForce);
 		} else {
-			rigidbody2D.AddForce(-Vector2.right * rollForce * 2.0f / 3.0f);
+			rigidbody.AddForce(-Vector2.right * rollForce * 2.0f / 3.0f);
 		}
 
 		PlayerInputManager.Instance.disablePlayerInput();
@@ -221,9 +216,9 @@ public class PlayerController : MonoBehaviour {
 
 		if (grounded) {
 			Instantiate(jumpPuff, groundCheck.transform.position, Quaternion.identity);
-			rigidbody2D.AddForce(Vector2.right * rollForce);
+			rigidbody.AddForce(Vector2.right * rollForce);
 		} else {
-			rigidbody2D.AddForce(Vector2.right * rollForce * 2.0f / 3.0f);
+			rigidbody.AddForce(Vector2.right * rollForce * 2.0f / 3.0f);
 		}
 
 		PlayerInputManager.Instance.disablePlayerInput();
@@ -234,25 +229,30 @@ public class PlayerController : MonoBehaviour {
 		PlayerInputManager.Instance.enablePlayerInput();
 	}
 
+	public void handleSlashPressed () {
+		animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, SLASH_ANIMATION_TRIGGER);
+		PlayerInputManager.Instance.disablePlayerInput();
+	}
+
 	public void handleFireButtonDown () {
 		gunController.FireBulletIfPossible();
 	}
 
 	public void handleJumpButtonDown () {
 		if (grounded) {
-			rigidbody2D.AddForce(Vector2.up * jumpForce);
+			rigidbody.AddForce(Vector2.up * jumpForce);
 			grounded = false;
 			Instantiate(jumpPuff, groundCheck.transform.position, Quaternion.identity);
 			doubleJumpCharge = true;
 		} else {
 			if (leftTouching) {
-				rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
-				rigidbody2D.AddForce((new Vector2(1.0f, 2.0f)).normalized * jumpForce * 1.3f);
+				rigidbody.velocity = new Vector2(0.0f, 0.0f);
+				rigidbody.AddForce((new Vector2(1.0f, 2.0f)).normalized * jumpForce * 1.3f);
 				Instantiate(jumpPuff, leftCheck.transform.position, Quaternion.Euler(new Vector3(0, 0, 90)));
 				doubleJumpCharge = true;
 			} else if (rightTouching) {
-				rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
-				rigidbody2D.AddForce((new Vector2(-1.0f, 2.0f)).normalized * jumpForce * 1.3f);
+				rigidbody.velocity = new Vector2(0.0f, 0.0f);
+				rigidbody.AddForce((new Vector2(-1.0f, 2.0f)).normalized * jumpForce * 1.3f);
 				Instantiate(jumpPuff, rightCheck.transform.position, Quaternion.Euler(new Vector3(0, 0, 90)));
 				doubleJumpCharge = true;
 			} else {
@@ -261,7 +261,7 @@ public class PlayerController : MonoBehaviour {
 					doubleJumpCharge = false;
 					Vector2 jumpVector = Vector2.up;
 					jumpVector.x = 0.3f * Input.GetAxis ("Horizontal");
-					rigidbody2D.AddForce(jumpVector.normalized * jumpForce * 0.6f);
+					rigidbody.AddForce(jumpVector.normalized * jumpForce * 0.6f);
 				}
 			}
 		}

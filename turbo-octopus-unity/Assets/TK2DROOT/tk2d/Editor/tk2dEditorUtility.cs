@@ -7,7 +7,7 @@ using System.IO;
 public static class tk2dEditorUtility
 {
 	public static double version = 2.5;
-	public static int releaseId = 0; // < -10001 = alpha 1, other negative = beta release, 0 = final, positive = final hotfix
+	public static int releaseId = -2; // < -10001 = alpha 1, other negative = beta release, 0 = final, positive = final hotfix
 
 	static tk2dEditorUtility() {
 #if UNITY_3_5 || UNITY_4_0 || UNITY_4_0_1 || UNITY_4_1 || UNITY_4_2
@@ -21,16 +21,6 @@ public static class tk2dEditorUtility
 #else
 		Undo.undoRedoPerformed += OnUndoRedo;
 #endif
-	}
-
-	[MenuItem(tk2dMenu.root + "Rebuild All Sprites", false, 10280)]
-	static void RebuildAllSprites() {
-		tk2dBaseSprite[] allSprites = Object.FindObjectsOfType(typeof(tk2dBaseSprite)) as tk2dBaseSprite[];
-		tk2dTextMesh[] allTextMeshes = Object.FindObjectsOfType(typeof(tk2dTextMesh)) as tk2dTextMesh[];
-		tk2dStaticSpriteBatcher[] allBatchers = Object.FindObjectsOfType(typeof(tk2dStaticSpriteBatcher)) as tk2dStaticSpriteBatcher[];
-		foreach (var t in allSprites) 		{ t.ForceBuild(); }
-		foreach (var t in allTextMeshes) 	{ t.ForceBuild(); }
-		foreach (var t in allBatchers) 		{ t.ForceBuild(); }
 	}
 
 	static void OnUndoRedo() {

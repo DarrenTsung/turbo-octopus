@@ -10,7 +10,8 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 
 	private KeyCode action0 = KeyCode.Alpha1, action1 = KeyCode.Alpha2, action2 = KeyCode.F;
 	private KeyCode leftRoll = KeyCode.Q, rightRoll = KeyCode.E;
-	private KeyCode fireKey = KeyCode.Mouse0;
+	private KeyCode slashKey = KeyCode.Mouse0;
+	private KeyCode fireKey = KeyCode.Mouse1;
 	private KeyCode jumpKey = KeyCode.Space;
 
 	public bool playerInputAllowed;
@@ -58,6 +59,10 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 			}
 			if (Input.GetKeyDown (rightRoll)) {
 				playerController.handleRightRollPressed ();
+			}
+
+			if (Input.GetKeyDown (slashKey)) {
+				playerController.handleSlashPressed ();
 			}
 
 			// repeating checks

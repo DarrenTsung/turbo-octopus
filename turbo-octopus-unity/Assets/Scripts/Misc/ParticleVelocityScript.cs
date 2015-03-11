@@ -11,12 +11,12 @@ public class ParticleVelocityScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		ParticleSystem.Particle[] particles = new ParticleSystem.Particle[particleSystem.particleCount];
-		particleSystem.GetParticles(particles);
+		ParticleSystem.Particle[] particles = new ParticleSystem.Particle[GetComponent<ParticleSystem>().particleCount];
+		GetComponent<ParticleSystem>().GetParticles(particles);
 
 		for (int i=0; i<particles.Length; i++) {
 			particles[i].velocity = this.velocity;
 		}
-		particleSystem.SetParticles(particles, particles.Length);
+		GetComponent<ParticleSystem>().SetParticles(particles, particles.Length);
 	}
 }

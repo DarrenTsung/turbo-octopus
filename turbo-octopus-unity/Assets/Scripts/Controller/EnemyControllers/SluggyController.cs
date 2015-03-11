@@ -30,6 +30,6 @@ public class SluggyController : EnemyController {
 	}
 
 	public void MoveForward () {
-		rigidbody2D.AddForce(Vector2.right * velocity * moveForce);
+		GetComponent<Rigidbody2D>().AddForce(Vector2.right * velocity * moveForce);
 	}
 }
