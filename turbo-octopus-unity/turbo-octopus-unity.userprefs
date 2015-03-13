@@ -1,13 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controller/PlayerController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TK2DROOT/tk2dTileMap/Code/tk2dTileMapChunks.cs">
     <Files>
-      <File FileName="Assets/Scripts/Managers/PlayerInputManager.cs" Line="45" Column="1" />
+      <File FileName="Assets/Scripts/Managers/PlayerInputManager.cs" Line="50" Column="20" />
       <File FileName="Assets/Scripts/Managers/LevelManager.cs" Line="261" Column="24" />
-      <File FileName="Assets/Scripts/Controller/PlayerController.cs" Line="303" Column="14" />
+      <File FileName="Assets/Scripts/Controller/PlayerController.cs" Line="244" Column="56" />
       <File FileName="Assets/Scripts/Controller/BulletController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Controller/EnemyControllers/SluggyController.cs" Line="1" Column="1" />
-      <File FileName="Assets/TK2DROOT/tk2d/Editor/tk2dEditorSkin.cs" Line="14" Column="25" />
+      <File FileName="Assets/TK2DROOT/tk2d/Editor/tk2dEditorSkin.cs" Line="1" Column="1" />
+      <File FileName="Assets/TK2DROOT/tk2dTileMap/Code/tk2dTileMapChunks.cs" Line="387" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,7 +17,6 @@
             <Node name="Scripts" expanded="True">
               <Node name="Controller" expanded="True">
                 <Node name="EnemyControllers" expanded="True" />
-                <Node name="PlayerController.cs" selected="True" />
               </Node>
               <Node name="Managers" expanded="True" />
             </Node>
@@ -24,6 +24,11 @@
               <Node name="tk2d" expanded="True">
                 <Node name="Code" expanded="True">
                   <Node name="Gui" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="tk2dTileMap" expanded="True">
+                <Node name="Code" expanded="True">
+                  <Node name="tk2dTileMapChunks.cs" selected="True" />
                 </Node>
               </Node>
               <Node name="tk2dTileMap_demo" expanded="True">
