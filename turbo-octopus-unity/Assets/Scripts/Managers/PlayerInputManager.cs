@@ -29,6 +29,14 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 		playerInputAllowed = true;
 	}
 
+	public static Vector2 mousePosition() {
+		return new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
+	}
+
+	public static Vector3 mouseWorldPosition() {
+		return Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y));
+	}
+
 	protected void LateUpdate () {
 		if (playerController) {
 			if (!playerInputAllowed) {
@@ -40,8 +48,7 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 			playerController.handleAxisVector (axisVector);
  
 			// mouse movement
-			Vector2 mousePosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
-			playerController.handleMousePosition (mousePosition);
+			playerController.handleMousePosition ();
 
 			// actions
 			if (Input.GetKeyDown(action0)) {

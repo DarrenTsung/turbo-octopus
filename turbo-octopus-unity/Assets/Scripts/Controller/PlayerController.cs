@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 	new private Rigidbody2D rigidbody;
 
 	protected bool playerInputAllowed;
+	protected float torsoAnimationAngle;
 
 	protected void Start () {
 		animator = GetComponent<Animator> ();
@@ -81,6 +82,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	protected void LateUpdate () {
+		Vector3 newTorsoEulerAngles = torso.transform.eulerAngles;
+		newTorsoEulerAngles.z += torsoAnimationAngle;
+		torso.transform.eulerAngles = newTorsoEulerAngles;
+
 		Collider2D[] emptyArray = new Collider2D[1];
 		int groundedHit = Physics2D.OverlapCircleNonAlloc(groundCheck.transform.position, 0.2f, emptyArray, tileLayers);
 		grounded = groundedHit != 0 ? true : false;
@@ -154,8 +159,8 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void handleMousePosition (Vector2 mousePosition) {
-		Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3 (mousePosition.x, mousePosition.y));
+	public void handleMousePosition () {
+		Vector3 mouseWorldPosition = PlayerInputManager.mouseWorldPosition();
 
 		Vector3 headRayToMouse = mouseWorldPosition - head.transform.position;
 		if (!(leftTouching || rightTouching)) {
@@ -226,12 +231,19 @@ public class PlayerController : MonoBehaviour {
 
 	public void clearAnimationTriggerKeyAndAllowPlayerInput () {
 		animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, NO_ANIMATION_TRIGGER);
+		torsoAnimationAngle = 0;
 		PlayerInputManager.Instance.enablePlayerInput();
 	}
 
 	public void handleSlashPressed () {
 		animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, SLASH_ANIMATION_TRIGGER);
 		PlayerInputManager.Instance.disablePlayerInput();
+
+		// set the torso pointing to the mouse position during the animation
+		Vector2 mouseWorldPosition = PlayerInputManager.mouseWorldPosition();
+		float angleToMouse = angleToPosition(torso, mouseWorldPosition);
+		torsoAnimationAngle = angleToMouse;
+		Debug.Log ("Torso animation angle is: " + torsoAnimationAngle);
 	}
 
 	public void handleFireButtonDown () {
@@ -268,6 +280,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	protected void pointObjectToPosition (GameObject obj, Vector3 position) {
+		float angleInDegrees = angleToPosition(obj, position);
+		obj.transform.eulerAngles = new Vector3 (0.0f, 0.0f, angleInDegrees);
+	}
+
+	protected float angleToPosition (GameObject obj, Vector3 position) {
 		Vector3 rayToPosition = position - obj.transform.position;
 		if (!facingRight) {
 			rayToPosition.x *= -1.0f;
@@ -275,8 +292,9 @@ public class PlayerController : MonoBehaviour {
 		float angleInDegrees = Mathf.Atan2 (rayToPosition.y, rayToPosition.x) * 180.0f / Mathf.PI;
 		angleInDegrees += objectSpecificAngleAdditions (obj);
 		angleInDegrees = objectSpecificAngleRestrictions (obj, angleInDegrees);
-		obj.transform.eulerAngles = new Vector3 (0.0f, 0.0f, angleInDegrees);
+		return angleInDegrees;
 	}
+
 
 	protected float objectSpecificAngleAdditions (GameObject obj) {
 		if (obj == gun) {
