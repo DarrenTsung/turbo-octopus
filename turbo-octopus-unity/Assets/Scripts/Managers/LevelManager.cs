@@ -258,7 +258,6 @@ public class RoomModel {
 				} else {
 					// if startX is initialized, then we need to finish the creation of the door
 					if (startX != -1) {
-						int lastX = x - 1;
 						Orientation orientation = (y == 0) ? Orientation.Down : Orientation.Up;
 						DoorModel newDoor = new DoorModel(orientation, 
 						                                  currentDoorLength, 
@@ -285,7 +284,6 @@ public class RoomModel {
 				} else {
 					// if startX is initialized, then we need to finish the creation of the door
 					if (startY != -1) {
-						int lastY = y - 1;
 						Orientation orientation = (x == 0) ? Orientation.Left : Orientation.Right;
 						DoorModel newDoor = new DoorModel(orientation, 
 						                                  currentDoorLength, 
@@ -385,6 +383,18 @@ public class RoomModel {
 				}
 			}
 		}
+
+		Transform objectsToCloneTransform = room.transform.Find("ObjectsToClone");
+		Transform clonedObjectsTransform = tilemapObject.transform.Find ("ClonedObjects");
+
+		foreach (Transform objectToCloneTransform in objectsToCloneTransform) {
+			GameObject objectToClone = PrefabManager.PrefabForName(objectToCloneTransform.gameObject.name);
+			Vector3 myWorldPosition = this.WorldPosition();
+			GameObject clonedObject = MonoBehaviour.Instantiate(objectToClone, 
+			                                                    objectToClone.transform.position + myWorldPosition, 
+			                                                    Quaternion.identity) as GameObject;
+			clonedObject.transform.parent = clonedObjectsTransform;
+		}
 	}
 
 	public Tuple<DoorModel, DoorModel> MinimumDistanceToOtherRoom(RoomModel otherRoom) {
@@ -425,7 +435,7 @@ public class LevelManager : Singleton<LevelManager> {
 	protected GameObject player;
 	protected GameObject levelTilemap;
 
-	protected int roomCount = 5;
+	protected int roomCount = 1;
 	protected float width = 100.0f, height = 100.0f;
 	protected const int MAX_GENERATION_TRIES = 10;
 
@@ -474,8 +484,11 @@ public class LevelManager : Singleton<LevelManager> {
 			bool foundNonCollidingRoom = false;
 
 			for (int currentTry = 0; currentTry < MAX_GENERATION_TRIES; currentTry++) {
-				randomX = Random.Range (0, (int)width);
-				randomY = Random.Range (0, (int)height);
+				int roomWidth = randomModel.tilemapReference.width;
+				int roomHeight = randomModel.tilemapReference.height;
+
+				randomX = Random.Range (roomWidth, (int)width - roomWidth);
+				randomY = Random.Range (roomHeight, (int)height - roomHeight);
 				clonedModel = randomModel.Clone(randomModel.room, new Vector2(randomX, randomY));
 				if (!CollidingWithOtherRooms(clonedModel)) {
 					foundNonCollidingRoom = true;
@@ -557,11 +570,10 @@ public class LevelManager : Singleton<LevelManager> {
 			CorridorModel corridorModel = edges[a];
 
 			bool addToChosenEdges = false;
-			Debug.Log ("Room1: " + corridorModel.room1.id);
-			Debug.Log ("Room2: " + corridorModel.room2.id);
 			bool contains1 = treeMap.ContainsKey(corridorModel.room1);
 			bool contains2 = treeMap.ContainsKey(corridorModel.room2);
 
+			/*
 			Debug.Log ("Contains: (" + contains1 + ", " + contains2 + ")");
 			if (contains1) {
 				Debug.Log ("Tree1: " + treeMap[corridorModel.room1]);
@@ -569,6 +581,7 @@ public class LevelManager : Singleton<LevelManager> {
 			if (contains2) {
 				Debug.Log ("Tree2: " + treeMap[corridorModel.room2]);
 			}
+			*/
 
 
 			// if both rooms are in a tree

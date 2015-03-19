@@ -14,13 +14,21 @@ public static class GameUtils {
 	public const int DOOR_SPRITE_ID = 14;
 	public const int BACKGROUND_SPRITE_ID = 15;
 
+	public static LayerMask tileLayers;
+
+
 	static GameUtils () {
+		tileLayers = LayerMask.GetMask("Tile");
 		topObject = GameObject.Find("Objects");
 	}
 
-	public static GameObject GetTopLevelObject (GameObject obj) {
+	public static GameObject GetEnemyControllerGameObject(GameObject obj) {
 		Transform currentTransform = obj.transform;
-		while (currentTransform.parent.gameObject != topObject) {
+		while (!currentTransform.gameObject.GetComponent<EnemyController>()) {
+			// if we can't find it then return null
+			if (currentTransform.parent == null) {
+				return null;
+			}
 			currentTransform = currentTransform.parent;
 		}
 		return currentTransform.gameObject;
@@ -29,7 +37,15 @@ public static class GameUtils {
 	public static float ManhattanDistance(Vector2 a, Vector2 b) {
 		return Mathf.Abs(b.x - a.x) + Mathf.Abs(b.y - a.y);
 	}
+
+	public static Direction RandomHorizontalDirection() {
+		return Random.value < 0.5f ? Direction.Left : Direction.Right;
+	}
 }
+
+public enum Direction {
+	Left, Right, Up, Down
+};
 
 public class Tuple<T1, T2>
 {

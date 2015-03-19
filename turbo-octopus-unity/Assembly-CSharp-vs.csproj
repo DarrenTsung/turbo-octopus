@@ -46,16 +46,22 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Controller\BulletController.cs" />
-     <Compile Include="Assets\Scripts\Controller\CameraController.cs" />
-     <Compile Include="Assets\Scripts\Controller\EnemyController.cs" />
-     <Compile Include="Assets\Scripts\Controller\EnemyControllers\SluggyController.cs" />
-     <Compile Include="Assets\Scripts\Controller\GunController.cs" />
-     <Compile Include="Assets\Scripts\Controller\MuzzleFlashController.cs" />
-     <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Controller\TileController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\BulletController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\DamageController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\DamageTextController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\EnemyControllers\SlimeController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\EnemyControllers\SluggyController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\GunController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\MuzzleFlashController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\SlashController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\TileController.cs" />
      <Compile Include="Assets\Scripts\FiniteStateMachine.cs" />
      <Compile Include="Assets\Scripts\GameUtils.cs" />
+     <Compile Include="Assets\Scripts\Managers\DamageTextManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\EventManager.cs" />
      <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerInputManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PrefabManager.cs" />
@@ -157,6 +163,7 @@
      <None Include="Assets\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito24.fnt" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\resources\BlendVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\LitCutoutVertexColor.shader" />
+     <None Include="Assets\Resources\Fonts\VCROSDMono.fnt" />
      <None Include="Assets\TK2DROOT\tk2d\Editor\EditorUtility.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\CutoutVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d_demo\demobmfont\test.fnt" />
