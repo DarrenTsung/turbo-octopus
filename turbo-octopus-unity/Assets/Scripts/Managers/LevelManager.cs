@@ -391,7 +391,7 @@ public class RoomModel {
 			GameObject objectToClone = PrefabManager.PrefabForName(objectToCloneTransform.gameObject.name);
 			Vector3 myWorldPosition = this.WorldPosition();
 			GameObject clonedObject = MonoBehaviour.Instantiate(objectToClone, 
-			                                                    objectToClone.transform.position + myWorldPosition, 
+			                                                    objectToCloneTransform.position + myWorldPosition, 
 			                                                    Quaternion.identity) as GameObject;
 			clonedObject.transform.parent = clonedObjectsTransform;
 		}
@@ -439,7 +439,7 @@ public class LevelManager : Singleton<LevelManager> {
 	protected float width = 100.0f, height = 100.0f;
 	protected const int MAX_GENERATION_TRIES = 10;
 
-	void Awake() {
+	void Start() {
 		rooms = new List<RoomModel>();
 		clonedRooms = new List<RoomModel>();
 

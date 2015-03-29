@@ -7,6 +7,13 @@ public class TimerManager : Singleton<TimerManager> {
 	protected TimerManager () {}
 
 	protected Dictionary<string, float> timers;
+	protected List<Timer> timersV2;
+
+	public Timer MakeTimer() {
+		Timer t = new Timer();
+		timersV2.Add(t);
+		return t;
+	}
 
 	public void addTimerForKey (string key) {
 		addTimerForKey(key, 0.0f);
@@ -41,12 +48,17 @@ public class TimerManager : Singleton<TimerManager> {
 
 	protected void Awake () {
 		timers = new Dictionary<string, float> ();
+		timersV2 = new List<Timer> ();
 	}
 
 	protected void Update () {
 		List<string> keys = new List<string>(timers.Keys);
 		foreach (string k in keys) {
 			timers[k] -= Time.deltaTime;
+		}
+
+		foreach (Timer t in timersV2) {
+			t.Update(Time.deltaTime);
 		}
 	}
 }

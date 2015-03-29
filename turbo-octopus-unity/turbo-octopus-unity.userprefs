@@ -1,19 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/DamageTextManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/PrefabManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Managers/EventManager.cs" Line="9" Column="40" />
-      <File FileName="Assets/Scripts/Managers/PrefabManager.cs" Line="20" Column="1" />
-      <File FileName="Assets/Scripts/Managers/DamageTextManager.cs" Line="21" Column="23" />
-      <File FileName="Assets/Scripts/GameUtils.cs" Line="20" Column="1" />
-      <File FileName="Assets/TK2DROOT/tk2d/Editor/tk2dEditorSkin.cs" Line="23" Column="47" />
-      <File FileName="Assets/Scripts/Managers/LevelManager.cs" Line="450" Column="34" />
-      <File FileName="Assets/Scripts/Controllers/DamageController.cs" Line="16" Column="2" />
-      <File FileName="Assets/Scripts/Controllers/GunController.cs" Line="86" Column="37" />
-      <File FileName="Assets/Scripts/Controllers/EnemyControllers/SlimeController.cs" Line="18" Column="59" />
-      <File FileName="Assets/Scripts/Controllers/DamageTextController.cs" Line="16" Column="26" />
-      <File FileName="Assets/Scripts/Controllers/BulletController.cs" Line="31" Column="1" />
-      <File FileName="Assets/Scripts/Controllers/EnemyControllers/SluggyController.cs" Line="10" Column="64" />
+      <File FileName="Assets/Scripts/Controllers/GameLogic/EnemyControllers/SlimeController.cs" Line="169" Column="47" />
+      <File FileName="Assets/Scripts/Controllers/GameLogic/EnemyController.cs" Line="59" Column="1" />
+      <File FileName="Assets/Scripts/Managers/PrefabManager.cs" Line="35" Column="58" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,19 +12,23 @@
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
               <Node name="Controllers" expanded="True">
-                <Node name="EnemyControllers" expanded="True" />
+                <Node name="GameLogic" expanded="True">
+                  <Node name="EnemyControllers" expanded="True" />
+                </Node>
+                <Node name="UI" expanded="True">
+                  <Node name="DialogControllers" expanded="True" />
+                </Node>
               </Node>
               <Node name="Managers" expanded="True">
-                <Node name="DamageTextManager.cs" selected="True" />
+                <Node name="PrefabManager.cs" selected="True" />
               </Node>
+              <Node name="Misc" expanded="True" />
             </Node>
           </Node>
           <Node name="Assembly-CSharp-Editor" expanded="True">
             <Node name="TK2DROOT" expanded="True">
               <Node name="tk2d" expanded="True">
-                <Node name="Editor" expanded="True">
-                  <Node name="Camera" expanded="True" />
-                </Node>
+                <Node name="Editor" expanded="True" />
               </Node>
             </Node>
           </Node>

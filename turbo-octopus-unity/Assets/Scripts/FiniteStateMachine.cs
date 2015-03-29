@@ -156,6 +156,10 @@ public class FiniteStateMachine : MonoBehaviour {
 	}
 
 	protected void TransitionToState(State nextState) {
+		if (nextState == null) {
+			Debug.LogError("TransitionToState(state) - called with invalid state!");
+			return;
+		}
 		OnStateChange(currentState.GetId (), nextState.GetId ());
 		currentState = nextState;
 		stateTimer = currentState.GenerateTime ();

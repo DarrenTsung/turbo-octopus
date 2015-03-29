@@ -14,70 +14,93 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 	private KeyCode fireKey = KeyCode.Mouse1;
 	private KeyCode jumpKey = KeyCode.Space;
 
-	public bool playerInputAllowed;
+	public bool mouseInputEnabled, movementInputEnabled, rollingEnabled, slashingEnabled, actionsEnabled, shootingEnabled, jumpingEnabled;
 
 	public void SetPlayerController (PlayerController controller) {
 		playerController = controller;
-		playerInputAllowed = true;
+		EnablePlayerInput();
 	}
 
-	public void disablePlayerInput() {
-		playerInputAllowed = false;
+	public void DisablePlayerInput() {
+		mouseInputEnabled = false;
+		movementInputEnabled = false;
+		rollingEnabled = false;
+		slashingEnabled = false;
+		actionsEnabled = false;
+		shootingEnabled = false;
+		jumpingEnabled = false;
 	}
 
-	public void enablePlayerInput() {
-		playerInputAllowed = true;
+	public void EnablePlayerInput() {
+		mouseInputEnabled = true;
+		movementInputEnabled = true;
+		rollingEnabled = true;
+		slashingEnabled = true;
+		actionsEnabled = true;
+		shootingEnabled = true;
+		jumpingEnabled = true;
 	}
 
-	public static Vector2 mousePosition() {
+	public static Vector2 MousePosition() {
 		return new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
 	}
 
-	public static Vector3 mouseWorldPosition() {
+	public static Vector3 MouseWorldPosition() {
 		return Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y));
 	}
 
 	protected void LateUpdate () {
 		if (playerController) {
-			if (!playerInputAllowed) {
-				return;
+			if (movementInputEnabled) {
+				// axis movement
+				Vector2 axisVector = new Vector2(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
+				playerController.handleAxisVector (axisVector);
 			}
-
-			// axis movement
-			Vector2 axisVector = new Vector2(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
-			playerController.handleAxisVector (axisVector);
  
-			// mouse movement
-			playerController.handleMousePosition ();
-
-			// actions
-			if (Input.GetKeyDown(action0)) {
-				playerController.handleActionPressed (0);
-			} 
-			if (Input.GetKeyDown(action1)) {
-				playerController.handleActionPressed (1);
-			}
-			if (Input.GetKeyDown(action2)) {
-				playerController.handleActionPressed (2);
+			if (mouseInputEnabled) {
+				// mouse movement
+				playerController.handleMousePosition ();
 			}
 
-			if (Input.GetKeyDown (leftRoll)) {
-				playerController.handleLeftRollPressed ();
-			}
-			if (Input.GetKeyDown (rightRoll)) {
-				playerController.handleRightRollPressed ();
+			if (actionsEnabled) {
+				// actions
+				if (Input.GetKeyDown(action0)) {
+					playerController.handleActionPressed (0);
+				} 
+				if (Input.GetKeyDown(action1)) {
+					playerController.handleActionPressed (1);
+				}
+				if (Input.GetKeyDown(action2)) {
+					playerController.handleActionPressed (2);
+				}
 			}
 
-			if (Input.GetKeyDown (slashKey)) {
-				playerController.handleSlashPressed ();
+			if (rollingEnabled) {
+				if (Input.GetKeyDown (leftRoll)) {
+					playerController.handleLeftRollPressed ();
+				}
+				if (Input.GetKeyDown (rightRoll)) {
+					playerController.handleRightRollPressed ();
+				}
 			}
 
-			// repeating checks
-			if (Input.GetKey (fireKey)) {
-				playerController.handleFireButtonDown ();
+			if (slashingEnabled) {
+				if (Input.GetKeyDown (slashKey)) {
+					playerController.handleSlashPressed ();
+				}
 			}
-			if (Input.GetKeyDown (jumpKey)) {
-				playerController.handleJumpButtonDown ();
+
+			if (shootingEnabled) {
+				// repeating checks
+				if (Input.GetKey (fireKey)) {
+					playerController.handleFireButtonDown ();
+				}
+			}
+
+			if (jumpingEnabled) {
+				if (Input.GetKeyDown (jumpKey)) {
+					playerController.handleJumpButtonDown ();
+				}
 			}
 
 		}

@@ -10,15 +10,23 @@ public static class GameUtils {
 
 	public const int CORRIDOR_SIZE = 3;
 
-	// sprite id is found in the sprite collection for the tilemap
+	// sprite ids for the tilemap sprite collection 
 	public const int DOOR_SPRITE_ID = 14;
 	public const int BACKGROUND_SPRITE_ID = 15;
 
-	public static LayerMask tileLayers;
+	// sprite ids for the UI sprite collection
+	public const int UI_AMMO_FILLED_ID = 0;
+	public const int UI_AMMO_EMPTY_ID = 1;
+
+	public static LayerMask tileLayers, playerLayer;
+	public static int UILayer;
+	public static Vector3 PIXEL_SIZE;
 
 
 	static GameUtils () {
 		tileLayers = LayerMask.GetMask("Tile");
+		playerLayer = LayerMask.GetMask("Player");
+		UILayer = LayerMask.NameToLayer("UI");
 		topObject = GameObject.Find("Objects");
 	}
 
@@ -40,6 +48,10 @@ public static class GameUtils {
 
 	public static Direction RandomHorizontalDirection() {
 		return Random.value < 0.5f ? Direction.Left : Direction.Right;
+	}
+
+	public static float PixelsToMeter() {
+		return 10.0f;
 	}
 }
 

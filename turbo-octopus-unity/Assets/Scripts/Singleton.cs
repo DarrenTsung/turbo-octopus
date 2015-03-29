@@ -10,7 +10,7 @@
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
 	private static T _instance;
-	
+
 	private static object _lock = new object();
 	
 	public static T Instance
@@ -54,7 +54,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 						          _instance.gameObject.name);
 					}
 				}
-				
+
 				return _instance;
 			}
 		}
