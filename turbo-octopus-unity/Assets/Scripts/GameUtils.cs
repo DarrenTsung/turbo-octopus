@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class GameUtils {
 
-	private static GameObject topObject;
+	private static GameObject topObject, player;
 	public const int FOREGROUND_LAYER = 0;
 	public const int COLLIDER_LAYER = 1;
 	public const int BACKGROUND_LAYER = 2;
@@ -18,7 +18,7 @@ public static class GameUtils {
 	public const int UI_AMMO_FILLED_ID = 0;
 	public const int UI_AMMO_EMPTY_ID = 1;
 
-	public static LayerMask tileLayers, playerLayer;
+	public static LayerMask tileLayers, playerLayer, bulletRaytraceLayers;
 	public static int UILayer;
 	public static Vector3 PIXEL_SIZE;
 
@@ -26,8 +26,14 @@ public static class GameUtils {
 	static GameUtils () {
 		tileLayers = LayerMask.GetMask("Tile");
 		playerLayer = LayerMask.GetMask("Player");
+		bulletRaytraceLayers = LayerMask.GetMask("Tile", "Monsters");
 		UILayer = LayerMask.NameToLayer("UI");
 		topObject = GameObject.Find("Objects");
+		player = GameObject.Find ("Objects/Player");
+	}
+
+	public static GameObject PlayerInstance() {
+		return player;
 	}
 
 	public static GameObject GetEnemyControllerGameObject(GameObject obj) {
@@ -52,6 +58,11 @@ public static class GameUtils {
 
 	public static float PixelsToMeter() {
 		return 10.0f;
+	}
+
+	public static float ConvertPixelsToMeters(float pixels) {
+		float conversion = GameUtils.PixelsToMeter();
+		return pixels / conversion;
 	}
 }
 

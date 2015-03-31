@@ -48,10 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Controllers\GameLogic\BulletController.cs" />
      <Compile Include="Assets\Scripts\Controllers\GameLogic\DamageController.cs" />
-     <Compile Include="Assets\Scripts\Controllers\GameLogic\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\GameLogic\DropItems\GoldController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\GameLogic\DropItems\ItemDropBase.cs" />
+     <Compile Include="Assets\Scripts\Controllers\GameLogic\EnemyControllers\EnemyController.cs" />
      <Compile Include="Assets\Scripts\Controllers\GameLogic\EnemyControllers\SlimeController.cs" />
      <Compile Include="Assets\Scripts\Controllers\GameLogic\EnemyControllers\SluggyController.cs" />
-     <Compile Include="Assets\Scripts\Controllers\GameLogic\GoldController.cs" />
      <Compile Include="Assets\Scripts\Controllers\GameLogic\GunController.cs" />
      <Compile Include="Assets\Scripts\Controllers\GameLogic\MuzzleFlashController.cs" />
      <Compile Include="Assets\Scripts\Controllers\GameLogic\PlayerController.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets\Scripts\Controllers\UI\DamageTextController.cs" />
      <Compile Include="Assets\Scripts\Controllers\UI\DialogControllers\DialogController.cs" />
      <Compile Include="Assets\Scripts\Controllers\UI\DialogControllers\PrimaryDialogController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\UI\DialogControllers\SecondaryDialogController.cs" />
      <Compile Include="Assets\Scripts\Controllers\UI\GoldCounterController.cs" />
      <Compile Include="Assets\Scripts\Controllers\UI\UIBaseController.cs" />
      <Compile Include="Assets\Scripts\FiniteStateMachine.cs" />
@@ -73,6 +75,7 @@
      <Compile Include="Assets\Scripts\Managers\PlayerInputManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PrefabManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\SecondaryDialogManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TimerManager.cs" />
      <Compile Include="Assets\Scripts\Misc\AutoDestroyParticleSystem.cs" />
      <Compile Include="Assets\Scripts\Misc\ParticleVelocityScript.cs" />

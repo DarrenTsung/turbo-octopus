@@ -74,7 +74,7 @@ public class BulletController : MonoBehaviour {
 		Vector2 movementThisStep = GetComponent<Rigidbody2D>().position - previousPosition;
 
 		//check for obstructions in the path that we've traveled in the last timestep 
-		RaycastHit2D hitInfo = Physics2D.Raycast(previousPosition, movementThisStep.normalized, movementThisStep.magnitude);
+		RaycastHit2D hitInfo = Physics2D.Raycast(previousPosition, movementThisStep.normalized, movementThisStep.magnitude, GameUtils.bulletRaytraceLayers);
 		if (hitInfo.collider != null && hitInfo.fraction != 0.0f) {
 			GameObject enemy = GameUtils.GetEnemyControllerGameObject(hitInfo.transform.gameObject);
 			if (enemy) {

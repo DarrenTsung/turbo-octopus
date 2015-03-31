@@ -1,26 +1,32 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/PrefabManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/SecondaryDialogManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Controllers/GameLogic/EnemyControllers/SlimeController.cs" Line="169" Column="47" />
-      <File FileName="Assets/Scripts/Controllers/GameLogic/EnemyController.cs" Line="59" Column="1" />
-      <File FileName="Assets/Scripts/Managers/PrefabManager.cs" Line="35" Column="58" />
+      <File FileName="Assets/Scripts/Controllers/GameLogic/EnemyControllers/SlimeController.cs" Line="172" Column="32" />
+      <File FileName="Assets/Scripts/Managers/PrefabManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameUtils.cs" Line="44" Column="17" />
+      <File FileName="Assets/Scripts/Controllers/UI/GoldCounterController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Controllers/GameLogic/DropItems/GoldController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Controllers/GameLogic/DropItems/ItemDropBase.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/TK2DROOT/tk2d/Editor/tk2dEditorSkin.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Controllers/GameLogic/BulletController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/SecondaryDialogManager.cs" Line="7" Column="26" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Resources" expanded="True" />
             <Node name="Scripts" expanded="True">
               <Node name="Controllers" expanded="True">
                 <Node name="GameLogic" expanded="True">
+                  <Node name="DropItems" expanded="True" />
                   <Node name="EnemyControllers" expanded="True" />
-                </Node>
-                <Node name="UI" expanded="True">
-                  <Node name="DialogControllers" expanded="True" />
                 </Node>
               </Node>
               <Node name="Managers" expanded="True">
-                <Node name="PrefabManager.cs" selected="True" />
+                <Node name="SecondaryDialogManager.cs" selected="True" />
               </Node>
               <Node name="Misc" expanded="True" />
             </Node>
