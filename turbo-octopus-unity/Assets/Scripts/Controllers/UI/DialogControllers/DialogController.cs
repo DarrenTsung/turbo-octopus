@@ -23,13 +23,12 @@ public class DialogController : MonoBehaviour {
 
 	// X characters ('a', 'b', etc) every second
 	public const float DIALOG_CHARACTER_ANIMATION_SPEED = 20;
-	public const float DIALOG_CLOSE_DELAY = 0.5f;
+	public const float DIALOG_CLOSE_DELAY = 1.5f;
 
 	protected virtual void Start () {
 		currentState = DialogState.Opening;
 		characterIndex = 0;
 		dirtyTextMesh = true;
-		dialogToShow = "Well I daresay - you must be quite the fighter.";
 
 		textMeshObject = transform.Find ("Text").gameObject;
 		textMesh = textMeshObject.GetComponent<tk2dTextMesh> ();
@@ -37,7 +36,7 @@ public class DialogController : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 	}
 
-	void StartAnimationWithDialog (string dialog) {
+	public void StartAnimationWithDialog (string dialog) {
 		dialogToShow = dialog;
 		characterIndex = 0;
 		dirtyTextMesh = true;
@@ -65,6 +64,10 @@ public class DialogController : MonoBehaviour {
 		if (dirtyTextMesh) {
 			textMesh.text = dialogToShow.Substring(0, characterIndex);
 		}
+	}
+
+	protected virtual void LateUpdate () {
+
 	}
 
 	public virtual void HandleDialogFinish() {

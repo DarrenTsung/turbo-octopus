@@ -11,6 +11,6 @@ public class GoldController : ItemDropBase {
 	}
 
 	protected override void HandleHitPlayer() {
-		PlayerManager.Instance.gold += baseValue;
+		EventManager.CallGoldAcquired(baseValue);
 	}
 }

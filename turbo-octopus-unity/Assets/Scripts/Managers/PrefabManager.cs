@@ -9,17 +9,20 @@ public class PrefabManager : Singleton<PrefabManager> {
 	public Object Bullet, BulletPuff, BulletExplosion;
 	public Object Slime; 
 
-	public Object DamageText, AmmoSprite;
+	public Object ParticleText, AmmoSprite;
 	public Object SmallGold;
+
+	public Object SecondaryDialog;
 
 	void Awake () {
 		BulletPuff = Resources.Load("Prefabs/SpecialEffects/BulletPuff");
 		BulletExplosion = Resources.Load ("Prefabs/SpecialEffects/BulletExplosion");
 		Bullet = Resources.Load ("Prefabs/Objects/Bullet");
 		Slime = Resources.Load ("Prefabs/Objects/Slime");
-		DamageText = Resources.Load ("Prefabs/SPX/DamageText");
+		ParticleText = Resources.Load ("Prefabs/SPX/ParticleText");
 		AmmoSprite = Resources.Load ("Prefabs/UI/AmmoSprite");
 		SmallGold = Resources.Load ("Prefabs/SPX/SmallGold");
+		SecondaryDialog = Resources.Load ("Prefabs/UI/SecondaryDialog");
 	}
 
 	public static GameObject PrefabForName(string name) {

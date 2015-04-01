@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DamageTextController : MonoBehaviour {
+public class ParticleTextController : MonoBehaviour {
 
 	protected float lifespan, baseLifespan;
 	protected tk2dTextMesh textMesh;
@@ -13,13 +13,16 @@ public class DamageTextController : MonoBehaviour {
 		textMesh = GetComponent<tk2dTextMesh> ();
 	}
 
-	public void SetDamage(int damage) {
-		string damageText = damage.ToString();
-		textMesh.text = damageText;
+	public void SetNumberToDisplay(int n) {
+		textMesh.text = n.ToString();
 	}
 
 	public void SetScale(float scale) {
 		textMesh.scale = new Vector3(scale, scale, 1.0f);
+	}
+
+	public void SetColor(Color color) {
+		textMesh.color = color;
 	}
 	
 	void Update () {

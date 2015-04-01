@@ -28,6 +28,7 @@ public class BulletController : MonoBehaviour {
 	protected List<Vector2> collisionPoints;
 
 	protected bool isTracer;
+	protected List<Vector3> pointsToDraw;
 
 	public void SetDirection(Vector2 direction) {
 		GetComponent<Rigidbody2D>().velocity = Random.Range(initialSpeedMin, initialSpeedMax) * direction.normalized;
@@ -50,6 +51,8 @@ public class BulletController : MonoBehaviour {
 
 		collisionPoints = new List<Vector2> ();
 		collisionPoints.Insert(0, GetComponent<Rigidbody2D>().position);
+
+		pointsToDraw = new List<Vector3> ();
 	}
 
 	void Update() {
@@ -123,14 +126,13 @@ public class BulletController : MonoBehaviour {
 	}
 
 
-	void DrawBulletTrail() {
-		List<Vector3> pointsToDraw = CalculateDrawPoints();
-		DrawTrailWithPoints(pointsToDraw);
+	protected void DrawBulletTrail() {
+		CalculateDrawPoints();
+		DrawTrail();
 	}
 
-	List<Vector3> CalculateDrawPoints() {
-		List<Vector3> pointsToDraw = new List<Vector3> ();
-
+	protected void CalculateDrawPoints() {
+		pointsToDraw.Clear();
 		pointsToDraw.Add (new Vector3(GetComponent<Rigidbody2D>().position.x, GetComponent<Rigidbody2D>().position.y, -1.0f));
 
 		float distanceLeftToDraw = myDrawDistance;
@@ -141,17 +143,16 @@ public class BulletController : MonoBehaviour {
 			if (distanceToDraw > distanceLeftToDraw) {
 				Vector2 drawPoint = previousPosition + Vector2.ClampMagnitude(currentPosition - previousPosition, distanceLeftToDraw);
 				pointsToDraw.Add (new Vector3 (drawPoint.x, drawPoint.y, -1.0f));
-				return pointsToDraw;
+				return;
 			} else {
 				distanceLeftToDraw -= distanceToDraw;
 				pointsToDraw.Add (new Vector3 (currentPosition.x, currentPosition.y, -1.0f));
 			}
 			previousPosition = currentPosition;
 		}
-		return pointsToDraw;
 	}
 
-	void DrawTrailWithPoints(List<Vector3> pointsToDraw) {
+	protected void DrawTrail() {
 		lineRenderer.SetVertexCount(pointsToDraw.Count);
 		for (int i=0; i<pointsToDraw.Count; i++) {
 			lineRenderer.SetPosition(i, pointsToDraw[i]);

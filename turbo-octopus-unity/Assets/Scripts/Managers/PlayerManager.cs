@@ -12,6 +12,15 @@ public class PlayerManager : Singleton<PlayerManager> {
 	public int gold;
 
 	void Awake () {
+		RegisterForEvents();
 		gold = 0;
+	}
+
+	protected void RegisterForEvents() {
+		EventManager.GoldAcquired += HandleGoldAcquired;
+	}
+
+	protected void HandleGoldAcquired(int gold) {
+		this.gold += gold;
 	}
 }

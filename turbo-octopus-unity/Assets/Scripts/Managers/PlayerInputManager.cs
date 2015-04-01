@@ -66,6 +66,7 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 				// actions
 				if (Input.GetKeyDown(action0)) {
 					playerController.handleActionPressed (0);
+					SecondaryDialogManager.Instance.SpawnDialog("This is a test! This is a test!");
 				} 
 				if (Input.GetKeyDown(action1)) {
 					playerController.handleActionPressed (1);
