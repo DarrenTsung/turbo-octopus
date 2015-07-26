@@ -11,7 +11,7 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 	private KeyCode action0 = KeyCode.Alpha1, action1 = KeyCode.Alpha2, action2 = KeyCode.F;
 	private KeyCode leftRoll = KeyCode.Q, rightRoll = KeyCode.E;
 	private KeyCode slashKey = KeyCode.Mouse0;
-	private KeyCode fireKey = KeyCode.Mouse1;
+	private KeyCode fireKey = KeyCode.R;
 	private KeyCode jumpKey = KeyCode.Space;
 
 	public bool mouseInputEnabled, movementInputEnabled, rollingEnabled, slashingEnabled, actionsEnabled, shootingEnabled, jumpingEnabled;
@@ -66,13 +66,13 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 				// actions
 				if (Input.GetKeyDown(action0)) {
 					playerController.handleActionPressed (0);
-					SecondaryDialogManager.Instance.SpawnDialog("This is a test! This is a test!");
 				} 
 				if (Input.GetKeyDown(action1)) {
 					playerController.handleActionPressed (1);
 				}
 				if (Input.GetKeyDown(action2)) {
 					playerController.handleActionPressed (2);
+					SecondaryDialogManager.Instance.SpawnDialog("This is a test! This is a test!");
 				}
 			}
 
@@ -104,9 +104,9 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 				}
 			}
 
-			if (Input.GetKey(KeyCode.F)) {
-				Debug.Break();
-			}
+			// if (Input.GetKey(KeyCode.F)) {
+			// 	Debug.Break();
+			// }
 		}
 	}
 }
