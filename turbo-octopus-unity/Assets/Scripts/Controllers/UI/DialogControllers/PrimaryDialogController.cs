@@ -7,9 +7,9 @@ public class PrimaryDialogController : DialogController {
 	protected tk2dSlicedSprite backgroundSprite;
 	protected tk2dCameraAnchor myAnchor;
 
-	protected override void Start ()
+	protected override void Awake ()
 	{
-		base.Start ();
+		base.Awake ();
 		myAnchor = transform.parent.gameObject.GetComponent<tk2dCameraAnchor> ();
 		backgroundObject = transform.Find ("Background").gameObject;
 		backgroundSprite = backgroundObject.GetComponent<tk2dSlicedSprite> ();

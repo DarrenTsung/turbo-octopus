@@ -1,44 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/SecondaryDialogManager.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../DuckProject/KnightsOfTheFarm/Assets/Scripts/Controllers/PlayerMovementController.cs">
     <Files>
-      <File FileName="Assets/Scripts/Controllers/UI/ParticleTextController.cs" Line="30" Column="25" />
-      <File FileName="Assets/TK2DROOT/tk2d/Editor/tk2dEditorSkin.cs" Line="18" Column="1" />
-      <File FileName="Assets/Scripts/Controllers/GameLogic/DropItems/GoldController.cs" Line="15" Column="2" />
-      <File FileName="Assets/Scripts/Managers/ParticleTextManager.cs" Line="26" Column="50" />
-      <File FileName="Assets/Scripts/Managers/LevelManager.cs" Line="201" Column="1" />
-      <File FileName="Assets/Scripts/Managers/TimerManager.cs" Line="56" Column="27" />
-      <File FileName="Assets/Scripts/Controllers/GameLogic/BulletController.cs" Line="152" Column="3" />
-      <File FileName="Assets/Scripts/Managers/SecondaryDialogManager.cs" Line="11" Column="28" />
-      <File FileName="Assets/Scripts/Managers/PrefabManager.cs" Line="25" Column="66" />
-      <File FileName="Assets/Scripts/GameUtils.cs" Line="62" Column="1" />
+      <File FileName="../../DuckProject/KnightsOfTheFarm/Assets/Scripts/Controllers/PlayerMovementController.cs" Line="36" Column="1" />
+      <File FileName="../../DuckProject/KnightsOfTheFarm/Assets/Scripts/Managers/PlayerInputManager.cs" Line="55" Column="5" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="GameLogic" expanded="True">
-                  <Node name="DropItems" expanded="True" />
-                </Node>
-                <Node name="UI" expanded="True" />
-              </Node>
-              <Node name="Managers" expanded="True">
-                <Node name="SecondaryDialogManager.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="TK2DROOT" expanded="True">
-              <Node name="tk2d" expanded="True">
-                <Node name="Editor" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

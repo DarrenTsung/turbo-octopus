@@ -82,14 +82,10 @@ public class BulletController : MonoBehaviour {
 			GameObject enemy = GameUtils.GetEnemyControllerGameObject(hitInfo.transform.gameObject);
 			if (enemy) {
 				Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
-				if (enemyRigidbody) {
-					Vector2 force = GetComponent<Rigidbody2D>().velocity * GetComponent<Rigidbody2D>().mass;
-					enemyRigidbody.AddForce(force);
-				}
-
 				EnemyController behaviorController = enemy.GetComponent<EnemyController> ();
 				if (behaviorController) {
-					behaviorController.OnHit(gameObject, hitInfo.point);
+					Vector2 force = GetComponent<Rigidbody2D>().velocity * GetComponent<Rigidbody2D>().mass;
+					behaviorController.OnHit(gameObject, hitInfo.point, force);
 				}
 			}
 				

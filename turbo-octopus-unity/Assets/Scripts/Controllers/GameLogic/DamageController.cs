@@ -16,6 +16,14 @@ public class DamageController : MonoBehaviour {
 		comboMultiplier = 1;
 	}
 
+	public int maxBaseDamage() {
+		return damageMax;
+	}
+
+	public int minBaseDamage() {
+		return damageMin;
+	}
+
 	// critChance = 0.0 -- 1.0
 	public void SetUp(int damageMin, int damageMax, float critChance, float critMultiplier) {
 		this.damageMax = damageMax;

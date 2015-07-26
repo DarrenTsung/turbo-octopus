@@ -36,7 +36,6 @@ public class SlashController : MonoBehaviour {
 		EnemyController enemyController = otherObject.GetComponent<EnemyController> ();
 		if (enemyController) {
 			Vector2 approximatedCollisionPoint = otherObject.transform.position + new Vector3(Random.value * 0.5f, Random.value * 0.5f, 0.0f);
-			enemyController.OnHit(gameObject, approximatedCollisionPoint);
 
 			Rigidbody2D enemyRigidbody = otherObject.GetComponent<Rigidbody2D> ();
 			if (enemyRigidbody && !enemyController.IsDying()) {
@@ -45,7 +44,7 @@ public class SlashController : MonoBehaviour {
 					direction.x *= -1;
 				}
 				enemyRigidbody.velocity = new Vector2(0.0f, 0.0f);
-				enemyRigidbody.AddForce(direction * 300.0f);
+				enemyController.OnHit(gameObject, approximatedCollisionPoint, direction * 300.0f);
 			}
 		}
 
@@ -54,7 +53,7 @@ public class SlashController : MonoBehaviour {
 
 	public void SetComboLevel(int comboLevel) {
 		this.comboLevel = comboLevel;
-		damageController.SetComboMultiplier(comboLevel);
+		//damageController.SetComboMultiplier(comboLevel);
 	}
 
 	public void EndSlash() {

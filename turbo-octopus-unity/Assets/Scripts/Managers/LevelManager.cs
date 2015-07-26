@@ -388,9 +388,8 @@ public class RoomModel {
 		Transform clonedObjectsTransform = tilemapObject.transform.Find ("ClonedObjects");
 
 		foreach (Transform objectToCloneTransform in objectsToCloneTransform) {
-			GameObject objectToClone = PrefabManager.PrefabForName(objectToCloneTransform.gameObject.name);
 			Vector3 myWorldPosition = this.WorldPosition();
-			GameObject clonedObject = MonoBehaviour.Instantiate(objectToClone, 
+			GameObject clonedObject = MonoBehaviour.Instantiate(objectToCloneTransform.gameObject, 
 			                                                    objectToCloneTransform.position + myWorldPosition, 
 			                                                    Quaternion.identity) as GameObject;
 			clonedObject.transform.parent = clonedObjectsTransform;
@@ -429,6 +428,8 @@ public class RoomModel {
 public class LevelManager : Singleton<LevelManager> {
 	protected LevelManager () {}
 
+	public TextAsset room1;
+
 	protected List<RoomModel> rooms;
 	protected List<RoomModel> clonedRooms;
 
@@ -446,12 +447,14 @@ public class LevelManager : Singleton<LevelManager> {
 		player = GameObject.Find("Objects/Player");
 		levelTilemap = GameObject.Find("Objects/LevelTilemap");
 
+		/*
 		Object[] roomObjects = Resources.LoadAll("Prefabs/Rooms");
 		PopulateRoomModels(roomObjects);
 		GenerateRooms();
 		GenerateCorridors();
 		// rebuild the tilemap
 		levelTilemap.GetComponent<tk2dTileMap>().Build();
+		*/
 	}
 
 	protected void PopulateRoomModels(Object[] roomObjects) {
@@ -514,9 +517,11 @@ public class LevelManager : Singleton<LevelManager> {
 
 		// spawn the player in the middle of the chosen room
 		Vector2 worldPosition = minRoom.WorldPosition();
+		/*
 		player.transform.position = new Vector3(worldPosition.x + minRoom.tilemapReference.width/2.0f,
 		                                        worldPosition.y + minRoom.tilemapReference.height/2.0f,
 		                                        player.transform.position.z);
+*/
 	}
 
 	protected void GenerateCorridors() {

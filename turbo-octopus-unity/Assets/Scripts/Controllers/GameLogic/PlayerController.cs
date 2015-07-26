@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour {
 	protected const int NO_ANIMATION_TRIGGER = 0;
 	protected const int FORWARD_ROLL_ANIMATION_TRIGGER = 1;
 	protected const int BACKWARD_ROLL_ANIMATION_TRIGGER = 2;
-	protected const int SLASH_ANIMATION_TRIGGER = 3;
+	protected const int SLASH_1_ANIMATION_TRIGGER = 3;
+	protected const int SLASH_2_ANIMATION_TRIGGER = 4;
+	protected const int SLASH_3_ANIMATION_TRIGGER = 5;
 
 	protected const float MIN_WALK_PUFF_TIMER = 0.3f;
 	protected const float MAX_WALK_PUFF_TIMER = 0.8f;
-	protected const string WALK_PUFF_TIMER_KEY = "WalkPuffTimerKey";
+	protected Timer walkPuffTimer;
 
 	protected const float IN_AIR_FORCE_MULTIPLIER = 0.3f;
 
@@ -39,7 +41,9 @@ public class PlayerController : MonoBehaviour {
 	protected GameObject gunReferencePointRight, gunReferencePointLeft;
 	protected GameObject slash, slashCollider;
 	protected SlashController slashController;
+	protected FreezingController freezingController;
 	protected int slashCombo;
+	protected bool slashPressed;
 
 	protected GameObject groundCheck, leftCheck, rightCheck;
 	protected bool grounded, leftTouching, rightTouching;
@@ -62,6 +66,7 @@ public class PlayerController : MonoBehaviour {
 
 		animator = GetComponent<Animator> ();
 		rigidbody = GetComponent<Rigidbody2D> ();
+		freezingController = GetComponent<FreezingController> ();
 
 		PlayerInputManager.Instance.SetPlayerController(this);
 
@@ -89,7 +94,8 @@ public class PlayerController : MonoBehaviour {
 		leftCheck = transform.Find ("Checks/LeftCheck").gameObject;
 		rightCheck = transform.Find ("Checks/RightCheck").gameObject;
 
-		TimerManager.Instance.addTimerForKey(WALK_PUFF_TIMER_KEY, Random.Range(MIN_WALK_PUFF_TIMER, MAX_WALK_PUFF_TIMER));
+		walkPuffTimer = TimerManager.Instance.MakeTimer();
+		walkPuffTimer.SetTime(Random.Range(MIN_WALK_PUFF_TIMER, MAX_WALK_PUFF_TIMER));
 		walkPuff = Resources.Load ("Prefabs/SpecialEffects/WalkPuff");
 		jumpPuff = Resources.Load ("Prefabs/SpecialEffects/JumpPuff");
 
@@ -151,6 +157,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void handleAxisVector (Vector2 axisVector) {
+		// if our rigidbody is current kinematic, don't move through player input
+		if (rigidbody.isKinematic) {
+			return;
+		}
+
 		// the player input creates a desired velocity -> the velocity we should go towards
 		float desiredSpeed = axisVector.x;
 
@@ -174,9 +185,9 @@ public class PlayerController : MonoBehaviour {
 		animator.SetFloat ("horizontalSpeed", rigidbody.velocity.x);
 
 		if (grounded) {
-			if (rigidbody.velocity.x != 0.0 && TimerManager.Instance.timerDoneForKey(WALK_PUFF_TIMER_KEY)) {
+			if (rigidbody.velocity.x != 0.0 && walkPuffTimer.IsFinished()) {
 				Instantiate(walkPuff, groundCheck.transform.position, Quaternion.identity);
-				TimerManager.Instance.resetTimerForKey(WALK_PUFF_TIMER_KEY, Random.Range(MIN_WALK_PUFF_TIMER, MAX_WALK_PUFF_TIMER));
+				walkPuffTimer.SetTime(Random.Range(MIN_WALK_PUFF_TIMER, MAX_WALK_PUFF_TIMER));
 			}
 		}
 	}
@@ -267,16 +278,26 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void handleSlashPressed () {
-		slashController.SetComboLevel(slashCombo);
-		animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, SLASH_ANIMATION_TRIGGER);
-		PlayerInputManager.Instance.DisablePlayerInput();
-		PlayerInputManager.Instance.movementInputEnabled = true;
-		PlayerInputManager.Instance.jumpingEnabled = true;
+		slashPressed = true;
+		int currentTriggerKey = animator.GetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY);
+		if (currentTriggerKey == SLASH_1_ANIMATION_TRIGGER
+		    || currentTriggerKey == SLASH_2_ANIMATION_TRIGGER
+		    || currentTriggerKey == SLASH_3_ANIMATION_TRIGGER) {
+			// do nothing for now
+		} else {
+			slashPressed = false;
+			slashController.SetComboLevel(slashCombo);
+			animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, SLASH_1_ANIMATION_TRIGGER);
+			PlayerInputManager.Instance.DisablePlayerInput();
+			PlayerInputManager.Instance.movementInputEnabled = true;
+			PlayerInputManager.Instance.jumpingEnabled = true;
+			PlayerInputManager.Instance.slashingEnabled = true;
 
-		// set the torso pointing to the mouse position during the animation
-		Vector2 mouseWorldPosition = PlayerInputManager.MouseWorldPosition();
-		float angleToMouse = angleToPosition(torso, mouseWorldPosition);
-		torsoAnimationAngle = angleToMouse;
+			// set the torso pointing to the mouse position during the animation
+			Vector2 mouseWorldPosition = PlayerInputManager.MouseWorldPosition();
+			float angleToMouse = angleToPosition(torso, mouseWorldPosition);
+			torsoAnimationAngle = angleToMouse;
+		}
 	}
 
 	public void handleFireButtonDown () {
@@ -304,9 +325,9 @@ public class PlayerController : MonoBehaviour {
 				// double jump if not touching wall or ground
 				if (doubleJumpCharge) {
 					doubleJumpCharge = false;
-					Vector2 jumpVector = Vector2.up;
-					jumpVector.x = 0.3f * Input.GetAxis ("Horizontal");
-					rigidbody.AddForce(jumpVector.normalized * jumpForce * 0.6f);
+					rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0.0f);
+					rigidbody.AddForce(Vector2.up * jumpForce);
+					Instantiate(jumpPuff, groundCheck.transform.position, Quaternion.identity);
 				}
 			}
 		}
@@ -357,7 +378,24 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void slashUpwardForce() {
+		rigidbody.AddForce(Vector2.up * 200.0f);
+	}
+
 	public void EndSlash() {
+		// if the user has pressed slash again while slashing, move to next part of the combo if possible
+		if (slashPressed) {
+			int currentTriggerKey = animator.GetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY);
+			if (currentTriggerKey != SLASH_2_ANIMATION_TRIGGER) {
+				animator.SetInteger(SPECIFIC_ANIMATION_TRIGGER_KEY, currentTriggerKey+1);
+				slashPressed = false;
+			} else {
+				clearAnimationTriggerKeyAndAllowPlayerInput();
+			}
+		} else {
+			clearAnimationTriggerKeyAndAllowPlayerInput();
+		}
+
 		bool hitAnything = slashController.HitAnything();
 		if (hitAnything) {
 			slashCombo++;

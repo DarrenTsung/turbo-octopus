@@ -19,7 +19,13 @@ public class Timer {
 		float previousTime = timeLeft;
 		timeLeft -= deltaTime;
 		if (previousTime > 0.0 && timeLeft <= 0.0f) {
-			TimerFinished();
+			if (TimerFinished != null) {
+				TimerFinished();
+			}
 		}
+	}
+
+	public bool IsFinished() {
+		return timeLeft <= 0.0f;
 	}
 }

@@ -25,6 +25,7 @@ public class ParticleTextManager : Singleton<ParticleTextManager> {
 		// yellow color
 		controller.SetColor(new Color(1.0f, 0.95f, 0.05f, 1.0f));
 		controller.SetNumberToDisplay(gold);
+		controller.AddPrefixToDisplay("+");
 		goldText.transform.parent = transform;
 	}
 

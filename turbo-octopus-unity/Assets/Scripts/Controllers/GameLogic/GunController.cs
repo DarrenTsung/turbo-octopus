@@ -34,6 +34,8 @@ public class GunController : MonoBehaviour {
 
 	protected PlayerController playerController;
 
+	protected Timer readyToFireTimer;
+
 	void Start () {
 		bulletExitPoint = transform.Find ("BulletExitPoint");
 		bulletReferencePoint = transform.Find ("BulletReferencePoint");
@@ -42,7 +44,8 @@ public class GunController : MonoBehaviour {
 
 		cameraController = Camera.main.GetComponent<CameraController> ();
 
-		TimerManager.Instance.addTimerForKey (FIRING_BULLET_COOLDOWN_KEY);
+		readyToFireTimer = TimerManager.Instance.MakeTimer();
+		readyToFireTimer.SetTime(bulletFireCooldown);
 
 		basePosition = transform.localPosition;
 	}
@@ -63,9 +66,9 @@ public class GunController : MonoBehaviour {
 	}
 
 	public void FireBulletIfPossible () {
-		if (TimerManager.Instance.timerDoneForKey (FIRING_BULLET_COOLDOWN_KEY)) {
+		if (readyToFireTimer.IsFinished()) {
 			FireBullet();
-			TimerManager.Instance.resetTimerForKey (FIRING_BULLET_COOLDOWN_KEY, bulletFireCooldown);
+			readyToFireTimer.SetTime(bulletFireCooldown);
 		}
 	}
 

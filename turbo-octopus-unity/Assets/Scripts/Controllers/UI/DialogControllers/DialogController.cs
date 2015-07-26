@@ -14,18 +14,18 @@ public class DialogController : MonoBehaviour {
 	protected bool dirtyTextMesh;
 
 	protected Timer characterAddTimer, closeDialogTimer;
-	protected tk2dTextMesh textMesh;
+	[SerializeField] protected tk2dTextMesh textMesh;
 	protected GameObject textMeshObject;
 
 	protected Animator animator;
 
-	DialogState currentState;
+	protected DialogState currentState;
 
 	// X characters ('a', 'b', etc) every second
 	public const float DIALOG_CHARACTER_ANIMATION_SPEED = 20;
-	public const float DIALOG_CLOSE_DELAY = 1.5f;
+	public const float DIALOG_CLOSE_DELAY = 2.5f;
 
-	protected virtual void Start () {
+	protected virtual void Awake () {
 		currentState = DialogState.Opening;
 		characterIndex = 0;
 		dirtyTextMesh = true;
@@ -56,8 +56,16 @@ public class DialogController : MonoBehaviour {
 	}
 
 	protected virtual void StartClosingDialog() {
-		currentState = DialogState.Closing;
-		animator.SetBool("Closing", true);
+		if (currentState != DialogState.Closing) {
+			currentState = DialogState.Closing;
+			animator.SetBool("Closing", true);
+		}
+	}
+
+	public virtual void StartClosingDialogIfNecessary() {
+		if (currentState != DialogState.Closing) {
+			currentState = DialogState.Closing;
+		}
 	}
 	
 	protected virtual void Update () {

@@ -7,7 +7,8 @@ public class SecondaryDialogManager : Singleton<SecondaryDialogManager> {
 	List<GameObject> dialogs;
 	List<GameObject> dialogsToAdd;
 
-	private const float DIALOG_PADDING = 0.1f;
+	protected const float MAX_DIALOGS = 2.0f;
+	protected const float DIALOG_SPACING = 0.1f;
 
 	public void SpawnDialog(string text) {
 		GameObject dialog = Instantiate(PrefabManager.Instance.SecondaryDialog) as GameObject;
@@ -24,12 +25,12 @@ public class SecondaryDialogManager : Singleton<SecondaryDialogManager> {
 		dialogsToAdd = new List<GameObject>();
 	}
 
-	protected void Update() {
+	protected void LateUpdate() {
 		dialogs.AddRange(dialogsToAdd);
 		dialogsToAdd.Clear();
 
 		float currentY = 0;
-		int dialogIndex = 0;
+		float dialogIndex = 0;
 		for (int i=dialogs.Count - 1; i >= 0; i--) {
 			// remove dead objects
 			if (!dialogs[i]) {
@@ -37,14 +38,31 @@ public class SecondaryDialogManager : Singleton<SecondaryDialogManager> {
 				continue;
 			}
 
+			SecondaryDialogController secondaryDialogController = dialogs[i].GetComponent<SecondaryDialogController> ();
+
 			Vector3 oldPosition = dialogs[i].transform.localPosition;
 			dialogs[i].transform.localPosition = new Vector3(oldPosition.x, currentY, oldPosition.z);
 
-			SecondaryDialogController secondaryDialogController = dialogs[i].GetComponent<SecondaryDialogController> ();
 			secondaryDialogController.SetIndex(dialogIndex);
-			currentY += secondaryDialogController.ScaledHeight();
-			currentY += DIALOG_PADDING;
-			dialogIndex++;
+
+			// scale dialogs so that any dialogs that are above 2 dialogs in height get squished down into nothing
+			Vector3 oldScaling = dialogs[i].transform.lossyScale;
+			float percentHeight = secondaryDialogController.PercentHeight();
+			if (dialogIndex + percentHeight > MAX_DIALOGS) {
+				// round off the percent height so that it can only fit into 2 dialogs height
+				percentHeight -= dialogIndex + percentHeight - MAX_DIALOGS;
+				dialogs[i].transform.localScale = new Vector3(oldScaling.x, percentHeight, oldScaling.z);
+				if (percentHeight <= 0) {
+					secondaryDialogController.HandleDialogClose();
+					continue;
+				} else if (percentHeight <= 1.0f) {
+					secondaryDialogController.StartClosingDialogIfNecessary();
+				}
+			}
+
+			// increment the position pointer and scaling pointer
+			dialogIndex += secondaryDialogController.PercentHeight();
+			currentY += secondaryDialogController.ScaledHeight() + DIALOG_SPACING;
 		}
 	}
 }

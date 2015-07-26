@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 803256ada244d4b7984faffadf9c6bb7
-timeCreated: 1426091011
+timeCreated: 1428794539
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -26,6 +26,11 @@ TextureImporter:
     21300038: Player@slash0
     21300040: Player@slash1
     21300042: Player@slash1
+    21300044: Player@slash2
+    21300046: Player@slash3
+    21300048: Player@slash4
+    21300050: Player@slash5
+    21300052: Player@slash6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -74,8 +79,8 @@ TextureImporter:
     - name: Player@head
       rect:
         serializedVersion: 2
-        x: 2
-        y: 94
+        x: 6
+        y: 191
         width: 4
         height: 5
       alignment: 7
@@ -84,8 +89,8 @@ TextureImporter:
     - name: Player@right_arm
       rect:
         serializedVersion: 2
-        x: 1
-        y: 91
+        x: 5
+        y: 188
         width: 4
         height: 2
       alignment: 4
@@ -94,8 +99,8 @@ TextureImporter:
     - name: Player@left_arm
       rect:
         serializedVersion: 2
-        x: 6
-        y: 91
+        x: 10
+        y: 188
         width: 3
         height: 2
       alignment: 4
@@ -104,8 +109,8 @@ TextureImporter:
     - name: Player@gun
       rect:
         serializedVersion: 2
-        x: 1
-        y: 87
+        x: 5
+        y: 184
         width: 8
         height: 3
       alignment: 4
@@ -114,8 +119,8 @@ TextureImporter:
     - name: Player@muzzle_flash
       rect:
         serializedVersion: 2
-        x: 10
-        y: 87
+        x: 14
+        y: 184
         width: 4
         height: 5
       alignment: 4
@@ -124,8 +129,8 @@ TextureImporter:
     - name: Player@torso
       rect:
         serializedVersion: 2
-        x: 1
-        y: 80
+        x: 5
+        y: 177
         width: 5
         height: 6
       alignment: 9
@@ -134,8 +139,8 @@ TextureImporter:
     - name: Player@legs_standing
       rect:
         serializedVersion: 2
-        x: 2
-        y: 74
+        x: 6
+        y: 171
         width: 4
         height: 5
       alignment: 2
@@ -144,8 +149,8 @@ TextureImporter:
     - name: Player@legs_jumping
       rect:
         serializedVersion: 2
-        x: 0
-        y: 68
+        x: 4
+        y: 165
         width: 8
         height: 5
       alignment: 2
@@ -154,8 +159,8 @@ TextureImporter:
     - name: Player@legs_walk0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 61
+        x: 6
+        y: 158
         width: 4
         height: 5
       alignment: 2
@@ -164,8 +169,8 @@ TextureImporter:
     - name: Player@legs_walk1
       rect:
         serializedVersion: 2
-        x: 2
-        y: 55
+        x: 6
+        y: 152
         width: 4
         height: 5
       alignment: 2
@@ -174,8 +179,8 @@ TextureImporter:
     - name: Player@legs_walk2
       rect:
         serializedVersion: 2
-        x: 2
-        y: 49
+        x: 6
+        y: 146
         width: 4
         height: 5
       alignment: 2
@@ -184,8 +189,8 @@ TextureImporter:
     - name: Player@legs_walk3
       rect:
         serializedVersion: 2
-        x: 1
-        y: 43
+        x: 5
+        y: 140
         width: 6
         height: 5
       alignment: 2
@@ -194,8 +199,8 @@ TextureImporter:
     - name: Player@legs_wall
       rect:
         serializedVersion: 2
-        x: 2
-        y: 38
+        x: 6
+        y: 135
         width: 4
         height: 4
       alignment: 2
@@ -204,8 +209,8 @@ TextureImporter:
     - name: Player@sword
       rect:
         serializedVersion: 2
-        x: 16
-        y: 81
+        x: 20
+        y: 178
         width: 12
         height: 2
       alignment: 9
@@ -214,8 +219,8 @@ TextureImporter:
     - name: Player@sheath
       rect:
         serializedVersion: 2
-        x: 16
-        y: 65
+        x: 20
+        y: 162
         width: 5
         height: 12
       alignment: 0
@@ -224,8 +229,8 @@ TextureImporter:
     - name: Player@sheath_empty
       rect:
         serializedVersion: 2
-        x: 22
-        y: 65
+        x: 26
+        y: 162
         width: 5
         height: 12
       alignment: 0
@@ -234,8 +239,8 @@ TextureImporter:
     - name: Player@legs_attacking
       rect:
         serializedVersion: 2
-        x: 1
-        y: 32
+        x: 5
+        y: 129
         width: 8
         height: 5
       alignment: 2
@@ -244,21 +249,71 @@ TextureImporter:
     - name: Player@slash0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 43
-        width: 27
-        height: 21
+        x: 35
+        y: 165
+        width: 35
+        height: 35
       alignment: 9
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Player@slash1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 43
-        width: 27
-        height: 21
+        x: 70
+        y: 165
+        width: 35
+        height: 35
       alignment: 9
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@slash2
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 165
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@slash3
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 130
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@slash4
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 130
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@slash5
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 130
+        width: 70
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player@slash6
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 95
+        width: 35
+        height: 35
+      alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 

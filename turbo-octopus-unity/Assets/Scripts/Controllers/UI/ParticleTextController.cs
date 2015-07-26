@@ -17,6 +17,10 @@ public class ParticleTextController : MonoBehaviour {
 		textMesh.text = n.ToString();
 	}
 
+	public void AddPrefixToDisplay(string prefix) {
+		textMesh.text = prefix + textMesh.text;
+	}
+
 	public void SetScale(float scale) {
 		textMesh.scale = new Vector3(scale, scale, 1.0f);
 	}

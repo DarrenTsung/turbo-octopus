@@ -104,6 +104,9 @@ public class PlayerInputManager : Singleton<PlayerInputManager> {
 				}
 			}
 
+			if (Input.GetKey(KeyCode.F)) {
+				Debug.Break();
+			}
 		}
 	}
 }

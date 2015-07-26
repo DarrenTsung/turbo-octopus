@@ -3,12 +3,23 @@ using System.Collections;
 
 public class EnemyController : MonoBehaviour {
 	protected FiniteStateMachine stateMachine;
-	protected float health;
+	protected int health, baseHealth;
 	protected bool dying;
 	protected Animator animator;
-	protected new Rigidbody2D rigidbody2D;
+	protected Rigidbody2D myRigidbody; 
 
-	public virtual void OnHit (GameObject obj, Vector2 hitPoint) {
+	public virtual void OnHit (GameObject obj, Vector2 hitPoint, Vector3 hitForce) {
+		DamageController damageController = obj.GetComponent<DamageController> ();
+		if (damageController) {
+			DamageModel damageModel = damageController.ComputeDamage();
+			OnDamage(obj, hitPoint, hitForce, damageModel);
+		}
+	}
+
+	public virtual void OnDamage (GameObject obj, Vector2 hitPoint, Vector3 hitForce, DamageModel damageModel) {
+		health -= damageModel.computedDamage;
+
+		EventManager.CallDamageDealt(damageModel, gameObject, obj, hitPoint);
 	}
 
 	protected virtual void SetUpStateMachine() {
@@ -16,9 +27,10 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	protected virtual void Awake () {
-		health = 10.0f;
+		health = 100;
+		baseHealth = 100;
 		animator = GetComponent<Animator> ();
-		rigidbody2D = GetComponent<Rigidbody2D> ();
+		myRigidbody = GetComponent<Rigidbody2D> ();
 
 		stateMachine = gameObject.AddComponent<FiniteStateMachine>() as FiniteStateMachine;
 		stateMachine.AddStateChangeAction(HandleStateChange);
@@ -26,7 +38,7 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	protected virtual void Update () {
-	
+		// nothing in base class
 	}
 
 	protected virtual void HandleStateChange(string previousStateId, string nextStateId) {

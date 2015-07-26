@@ -1,0 +1,594 @@
+fileFormatVersion: 2
+guid: ca1eee89a794544b5996fa70e0a30146
+timeCreated: 1430095159
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CaveTileset@CTopLeft
+    21300002: CaveTileset@CTopCenter
+    21300004: CaveTileset@CTopRight
+    21300006: TileSheet@UnitySprite_3
+    21300008: CaveTileset@CFlowerVarient1
+    21300010: CaveTileset@CTreeVarient1_0
+    21300012: CaveTileset@CMiddleLeft
+    21300014: CaveTileset@CMiddle
+    21300016: CaveTileset@CMiddleRight
+    21300018: CaveTileset@CLavaTop
+    21300020: CaveTileset@CLavaMiddle
+    21300022: CaveTileset@CFlowerVarient2
+    21300024: CaveTileset@CTreeVarient1_2
+    21300026: CaveTileset@CTreeVarient1_3
+    21300028: CaveTileset@CBottomLeft
+    21300030: CaveTileset@CBottomCenter
+    21300032: CaveTileset@CBottomRight
+    21300034: TileSheet@UnitySprite_17
+    21300036: TileSheet@UnitySprite_18
+    21300038: TileSheet@UnitySprite_19
+    21300040: CaveTileset@CTreeVarient1_4
+    21300042: CaveTileset@CTreeVarient1_5
+    21300044: CaveTileset@CInsideBottomRight
+    21300046: CaveTileset@CInsideBottomLeft
+    21300048: CaveTileset@DoorMarker
+    21300050: CaveTileset@CTreeVarient1_6
+    21300052: CaveTileset@CInsideTopRight
+    21300054: CaveTileset@CInsideTopLeft
+    21300056: CaveTileset@CBushVarient1_0
+    21300058: CaveTileset@CBushVarient1_1
+    21300060: CaveTileset@CTreeVarient1_8
+    21300062: CaveTileset@CTreeVarient1_9
+    21300064: CaveTileset@CBackNormal
+    21300066: CaveTileset@CBackVarient1
+    21300068: TileSheet@UnitySprite_34
+    21300070: CaveTileset@CBushVarient1_2
+    21300072: CaveTileset@CBushVarient1_3
+    21300074: CaveTileset@CTreeVarient1_10
+    21300076: CaveTileset@CTreeVarient1_11
+    21300078: CaveTileset@CBackVarient2
+    21300080: CaveTileset@CBackVarient3
+    21300082: TileSheet@UnitySprite_41
+    21300084: TileSheet@UnitySprite_42
+    21300086: TileSheet@UnitySprite_43
+    21300088: TileSheet@UnitySprite_44
+    21300090: TileSheet@UnitySprite_45
+    21300092: TileSheet@UnitySprite_46
+    21300094: CaveTileset@CTreeVarient1_1
+    21300096: CaveTileset@CTreeVarient1_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 20
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: CaveTileset@CTopLeft
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTopCenter
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 171
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTopRight
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 171
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_3
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 171
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CFlowerVarient1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 171
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_0
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 171
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CMiddleLeft
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 151
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CMiddle
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 151
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CMiddleRight
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 151
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CLavaTop
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 151
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CLavaMiddle
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 151
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CFlowerVarient2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 151
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 151
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_3
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 151
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBottomLeft
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 131
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBottomCenter
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 131
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBottomRight
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 131
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_17
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 131
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_18
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 131
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_19
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 131
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_4
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 131
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 131
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CInsideBottomRight
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 111
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CInsideBottomLeft
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 111
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@DoorMarker
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 111
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 111
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CInsideTopRight
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 91
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CInsideTopLeft
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 91
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBushVarient1_0
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 91
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBushVarient1_1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 91
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_8
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 91
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_9
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 91
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBackNormal
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 71
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBackVarient1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 71
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_34
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 71
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBushVarient1_2
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 71
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBushVarient1_3
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 71
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_10
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 71
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_11
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 71
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBackVarient2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 51
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CBackVarient3
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 51
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_41
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 51
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_42
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 51
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_43
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 51
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_44
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 51
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 31
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TileSheet@UnitySprite_46
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 31
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_1
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 171
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CaveTileset@CTreeVarient1_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 111
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

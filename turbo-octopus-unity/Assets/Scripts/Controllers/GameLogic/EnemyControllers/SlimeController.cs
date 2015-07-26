@@ -8,6 +8,8 @@ public class SlimeController : EnemyController {
 	protected const string PREJUMP_STATE_ID = "SlimePreJumpStateId";
 	protected const string JUMPING_STATE_ID = "SlimeJumpingStateId";
 
+	protected const int MAX_BLOOD_PARTICLES_PER_HIT = 5;
+
 	protected Transform groundCheck, leftCheck, rightCheck;
 	protected bool grounded, leftTouching, rightTouching;
 
@@ -15,22 +17,36 @@ public class SlimeController : EnemyController {
 
 	protected float speed, jumpForce;
 
-	public override void OnHit (GameObject obj, Vector2 hitPoint) {
+	protected override void Awake () {
+		base.Awake();
+		groundCheck = transform.Find ("GroundCheck");
+		leftCheck = transform.Find ("LeftCheck");
+		rightCheck = transform.Find ("RightCheck");
+		direction = Direction.Right;
+		jumpForce = 300.0f;
+		speed = 4.0f;
+		health = 50;
+		baseHealth = health;
+	}
+
+	public override void OnHit (GameObject obj, Vector2 hitPoint, Vector3 hitForce) {
+		base.OnHit(obj, hitPoint, hitForce);
+		myRigidbody.AddForce(hitForce);
+	}
+
+	public override void OnDamage (GameObject obj, Vector2 hitPoint, Vector3 hitForce, DamageModel damageModel) {
+		base.OnDamage(obj, hitPoint, hitForce, damageModel);
+
 		DamageController damageController = obj.GetComponent<DamageController> ();
-		if (!damageController) {
-			return;
-		}
-
-		DamageModel damageModel = damageController.ComputeDamage();
-
-		health -= damageModel.computedDamage;
-
-		EventManager.CallDamageDealt(damageModel, gameObject, obj, hitPoint);
+		float percentDamage = Mathf.Min((float)damageModel.computedDamage / (float)damageController.maxBaseDamage(), 1.5f);
+		int numberOfBloodParticlesToSpawn = (int)(percentDamage * MAX_BLOOD_PARTICLES_PER_HIT);
+		for (int i=0; i<numberOfBloodParticlesToSpawn; i++) SpawnBloodParticle(hitForce);
 	}
 
 	protected override void SetUpStateMachine() {
 		stateMachine.AddState(IDLE_STATE_ID, 1.0f, 3.0f);
 		stateMachine.AddState(WALK_STATE_ID, 2.0f, 5.0f);
+
 		// negative min/max time means that the state will not advance without an outside trigger
 		stateMachine.AddState(PREJUMP_STATE_ID, -999.0f, -999.0f);
 		stateMachine.AddState(JUMPING_STATE_ID, -999.0f, -999.0f);
@@ -49,17 +65,15 @@ public class SlimeController : EnemyController {
 		stateMachine.SetStartState(IDLE_STATE_ID);
 	}
 
-	protected override void Awake () {
-		base.Awake();
-		groundCheck = transform.Find ("GroundCheck");
-		leftCheck = transform.Find ("LeftCheck");
-		rightCheck = transform.Find ("RightCheck");
-		direction = Direction.Right;
-		jumpForce = 600.0f;
-		speed = 4.0f;
-		health = 50.0f;
+	protected void SpawnBloodParticle(Vector3 hitForce) {
+		Vector3 offset = new Vector3 (Random.Range (-50.0f, 50.0f), Random.Range (-50.0f, 50.0f), 0.0f);
+		GameObject blood = Instantiate(PrefabManager.Instance.SlimeBlood, transform.position, Quaternion.identity) as GameObject;
+		blood.GetComponent<Rigidbody2D>().AddForce(1.4f * (hitForce + offset));
+		float scale = Random.Range(0.3f, 0.6f);
+		blood.transform.localScale = new Vector3 (scale, scale, 1.0f);
+		blood.transform.parent = ParticleManager.Instance.transform;
 	}
-	
+
 	protected override void Update () {
 		dying = health <= 0.0f;
 		animator.SetBool("Dying", dying);
@@ -78,18 +92,18 @@ public class SlimeController : EnemyController {
 		if (stateMachine.CurrentStateId().Equals(WALK_STATE_ID)) {
 			switch (direction) {
 				case Direction.Left:
-					rigidbody2D.velocity = new Vector2(-speed, rigidbody2D.velocity.y);
+					myRigidbody.velocity = new Vector2(-speed, myRigidbody.velocity.y);
 					break;
 				case Direction.Right:
-					rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
+					myRigidbody.velocity = new Vector2(speed, myRigidbody.velocity.y);
 					break;
 				default:
 					Debug.LogWarning("SlimeUpdate - direction is not valid: " + direction);
 					break;
 			}
 		}
-		animator.SetFloat("AbsoluteHorizontalSpeed", Mathf.Abs(rigidbody2D.velocity.x));
-		animator.SetFloat("AbsoluteVerticalSpeed", Mathf.Abs(rigidbody2D.velocity.y));
+		animator.SetFloat("AbsoluteHorizontalSpeed", Mathf.Abs(myRigidbody.velocity.x));
+		animator.SetFloat("AbsoluteVerticalSpeed", Mathf.Abs(myRigidbody.velocity.y));
 
 		// if we're not in jumping state and we're not grounded, transition to jumping
 		if (!stateMachine.CurrentStateId().Equals(JUMPING_STATE_ID) && !grounded) {
@@ -151,10 +165,10 @@ public class SlimeController : EnemyController {
 
 		switch (direction) {
 			case Direction.Left:
-				rigidbody2D.AddForce((new Vector2(-1.0f, 1.5f)).normalized * jumpForce);
+				myRigidbody.AddForce((new Vector2(-1.0f, 1.5f)).normalized * jumpForce);
 				break;
 			case Direction.Right:
-				rigidbody2D.AddForce((new Vector2(1.0f, 1.5f)).normalized * jumpForce);
+				myRigidbody.AddForce((new Vector2(1.0f, 1.5f)).normalized * jumpForce);
 				break;
 			default:
 				Debug.LogWarning("Jump - direction improperly set: " + direction);
@@ -167,6 +181,8 @@ public class SlimeController : EnemyController {
 		base.Die ();
 		// spawn gold at self
 		SpawnAtSelf(PrefabManager.Instance.SmallGold, 3);
+		// spawn 15 blood particles at self
+		for(int i=0; i<15; i++) SpawnBloodParticle(Vector3.up * 100.0f);
 	}
 
 	public override bool IsDying ()

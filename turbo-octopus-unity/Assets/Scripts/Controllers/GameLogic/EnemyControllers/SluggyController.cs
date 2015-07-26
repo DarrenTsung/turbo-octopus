@@ -7,7 +7,7 @@ public class SluggyController : EnemyController {
 	private float velocity = 1.0f;
 	private Animator animator;
 
-	public override void OnHit (GameObject obj, Vector2 hitPoint) {
+	public override void OnHit (GameObject obj, Vector2 hitPoint, Vector3 hitForce) {
 		BulletController bulletController = obj.GetComponent<BulletController> ();
 		if (bulletController) {
 			health -= 1;
@@ -20,7 +20,7 @@ public class SluggyController : EnemyController {
 
 	// Use this for initialization
 	void Start () {
-		health = 30.0f;
+		health = 30;
 		animator = GetComponent<Animator> ();
 	}
 	

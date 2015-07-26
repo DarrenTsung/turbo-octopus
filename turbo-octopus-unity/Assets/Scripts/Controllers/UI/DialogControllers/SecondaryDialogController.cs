@@ -3,12 +3,14 @@ using System.Collections;
 
 public class SecondaryDialogController : DialogController {
 
-	protected tk2dSlicedSprite backgroundSprite;
-	protected int cachedIndex;
+	tk2dSlicedSprite backgroundSprite;
+	protected float cachedIndex;
 
-	protected override void Start () {
-		base.Start ();
-		cachedIndex = 0;
+	protected const float FADE_ALPHA = 0.3f;
+
+	protected override void Awake () {
+		base.Awake ();
+		cachedIndex = 0.0f;
 		backgroundSprite = transform.Find ("BackgroundSprite").GetComponent<tk2dSlicedSprite> ();
 
 		float textX = GameUtils.ConvertPixelsToMeters(4.15f);
@@ -16,24 +18,23 @@ public class SecondaryDialogController : DialogController {
 		textMesh.gameObject.transform.localPosition = new Vector2(textX, textY);
 	}
 
+	public float PercentHeight() {
+		return transform.lossyScale.y;
+	}
+
 	public float ScaledHeight() {
 		float rawHeight = GameUtils.ConvertPixelsToMeters(backgroundSprite.dimensions.y);
 		return rawHeight * transform.lossyScale.y;
 	}
 
-	public void SetIndex(int index) {
+	public void SetIndex(float index) {
 		if (cachedIndex != index) {
-			if (index > 0) {
-				SetAlpha(0.5f);
-			} else {
-				SetAlpha(1.0f);
-			}
+			SetAlpha(Mathf.Max(FADE_ALPHA, 1.0f - (index / FADE_ALPHA)));
 			cachedIndex = index;
 		}
 	}
 
-	protected override void LateUpdate ()
-	{
+	protected override void LateUpdate () {
 		base.LateUpdate ();
 	}
 
